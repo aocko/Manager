@@ -1,0 +1,9 @@
+
+rsquid:S2095/"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(î¨»Ñüÿÿÿÿ8¬”ò± -
+Rsquid:UselessImportCheck"'Remove this unused import 'model.User'.(˜Ğ ñ8¶¾ñ® -
+rsquid:S2095&"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(î¨»Ñüÿÿÿÿ8Ñ Æ° -
+‚squid:S1149"_Replace the synchronized class "StringBuffer" by an unsynchronized one such as "StringBuilder".(—Ï¤ßùÿÿÿÿ8¶¾ñ® -
+esquid:S2095"GUse try-with-resources or close this "ResultSet" in a "finally" clause.(¶ë‰Ş8ˆı® -
+lsquid:S2095"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(ÎØ¤d8ÅÊ÷® -
+}squid:UselessImportCheck"MRemove this unused import 'com.sun.org.apache.xpath.internal.operations.And'.(€è×¡úÿÿÿÿ8ÅÊ÷® -
+Xsquid:S1191"5Use classes from the Java API instead of Sun classes.(€è×¡úÿÿÿÿ8ÅÊ÷® -
