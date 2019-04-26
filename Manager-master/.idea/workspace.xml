@@ -58,8 +58,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/action/UserAction.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="155">
-              <caret line="277" column="28" lean-forward="true" selection-start-line="277" selection-start-column="28" selection-end-line="277" selection-end-column="28" />
+            <state relative-caret-position="275">
+              <caret line="294" lean-forward="true" selection-start-line="294" selection-end-line="294" />
             </state>
           </provider>
         </entry>
@@ -129,7 +129,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/userIndex.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-160">
+            <state relative-caret-position="2280">
               <caret line="114" column="18" selection-start-line="114" selection-start-column="18" selection-end-line="114" selection-end-column="18" />
             </state>
           </provider>
@@ -297,9 +297,9 @@
       <select />
     </treeState>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="864" />
-    <option name="y" value="21" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="730" />
+    <option name="y" value="23" />
     <option name="width" value="1230" />
     <option name="height" value="1047" />
   </component>
@@ -309,6 +309,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -421,7 +422,6 @@
         </subPane>
       </pane>
       <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -429,7 +429,7 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1556271946843" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1556272618830" />
     <property name="database.console.LAST_STATE" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
@@ -647,11 +647,20 @@
       <workItem from="1556242413978" duration="193000" />
       <workItem from="1556259493623" duration="9643000" />
       <workItem from="1556272036372" duration="121000" />
+      <workItem from="1556272161550" duration="485000" />
     </task>
+    <task id="LOCAL-00001" summary="默认更改列表">
+      <created>1556272260186</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1556272260186</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="350695000" />
+    <option name="totallyTimeSpent" value="351180000" />
   </component>
   <component name="TodoView" selected-index="2">
     <todo-panel id="selected-file">
@@ -666,7 +675,7 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4990619" visible="true" weight="0.17750533" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4990619" visible="true" weight="0.17910448" />
       <window_info id="Structure" order="1" sideWeight="0.50093806" side_tool="true" weight="0.1546875" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Capture Tool" order="3" />
@@ -683,9 +692,9 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32925472" />
       <window_info anchor="bottom" id="Messages" order="7" weight="0.2224694" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32925472" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="8" sideWeight="0.49946696" visible="true" weight="0.32850778" />
       <window_info anchor="bottom" id="Docker" order="9" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5021322" side_tool="true" visible="true" weight="0.07349666" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50053304" side_tool="true" visible="true" weight="0.32850778" />
       <window_info anchor="bottom" id="Java Enterprise" order="11" weight="0.32925472" />
       <window_info anchor="bottom" id="Database Changes" order="12" />
       <window_info anchor="bottom" id="Version Control" order="13" />
@@ -752,6 +761,10 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="默认更改列表" />
+    <option name="LAST_COMMIT_MESSAGE" value="默认更改列表" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1346,6 +1359,13 @@
     <entry file="file://$PROJECT_DIR$/src/main/webapp/user/abc.jpg">
       <provider selected="true" editor-type-id="images" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/action/UserAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="275">
+          <caret line="294" lean-forward="true" selection-start-line="294" selection-end-line="294" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/dao/UserDao.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="460">
@@ -1398,15 +1418,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/userIndex.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-160">
+        <state relative-caret-position="2280">
           <caret line="114" column="18" selection-start-line="114" selection-start-column="18" selection-end-line="114" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/action/UserAction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="155">
-          <caret line="277" column="28" lean-forward="true" selection-start-line="277" selection-start-column="28" selection-end-line="277" selection-end-column="28" />
         </state>
       </provider>
     </entry>
