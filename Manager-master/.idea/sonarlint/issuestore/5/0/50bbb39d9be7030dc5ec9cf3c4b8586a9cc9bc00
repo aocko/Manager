@@ -1,0 +1,9 @@
+
+Hsquid:S1068",Remove this unused "gradeDao" private field.(İ¡ßæùÿÿÿÿ
+Hsquid:S1068",Remove this unused "majorDao" private field.(›Œ©Üşÿÿÿÿ
+Asquid:S1948"+Make "classList" transient or serializable.(×ª#
+Dsquid:S1948"(Make "aClass" transient or serializable.(¿Ú›ğûÿÿÿÿ
+Fsquid:S1948"*Make "classDao" transient or serializable.(ø¨ÙÂÿÿÿÿÿ
+Fsquid:S1948"*Make "gradeDao" transient or serializable.(İ¡ßæùÿÿÿÿ
+Fsquid:S1948"*Make "majorDao" transient or serializable.(›Œ©Üşÿÿÿÿ
+>squid:S1948"(Make "dbUtil" transient or serializable.(ú„çI

@@ -1,0 +1,34 @@
+
+<script type="text/javascript">
+	function setDateTime(){
+		var date=new Date();
+		var day=date.getDay();
+		var week;
+		switch(day){
+		case 0:week="星期日";break;
+		case 1:week="星期一";break;
+		case 2:week="星期二";break;
+		case 3:week="星期三";break;
+		case 4:week="星期四";break;
+		case 5:week="星期五";break;
+		case 6:week="星期六";break;
+		}
+		var today=date.getFullYear()+"年"+(date.getMonth()+1)+"月"+date.getDate()+"日  "+week+" "+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds();
+		document.getElementById("today").innerHTML=today;
+	}
+	
+	window.setInterval("setDateTime()", 1000);
+	
+</script>
+<div class="row-fluid">
+	<div class="span12">
+		<div class="head">
+            <div class="headLeft" style="padding-top:10px;font-size: 33px">
+
+                高校教室管理系统</div>
+			<div class="headRight">
+				欢迎管理员：<span class="label label-success" style="font-size:16px;">${currentUser.userName }</span>&nbsp;&nbsp;&nbsp;<span class="label label-info" id="today" style="font-size:16px;float: right;"></span>
+			</div>
+		</div>
+	</div>
+</div>

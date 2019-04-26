@@ -1,0 +1,47 @@
+a{
+	color: black !important;
+}
+
+.actionPage{
+	border: 1px solid #E5E5E5;
+	padding: 0px;
+}
+
+.actionPage .navi{
+	border-bottom: 1px solid #E5E5E5;
+	padding: 3px 10px 3px;
+	font-weight: normal;
+	background-color: #F3F3F3;
+}
+
+.defaultPage{
+	text-align:center;
+	margin-top: 120px;
+	font-size: 50px;
+	color: #b8ffee;
+	height: 300px;
+}
+
+.foot{
+	text-align: center;
+	margin-top:18px;
+	margin-bottom: 18px;
+}
+
+.head{
+	padding-bottom: 10px;
+	padding-right: 10px;
+}
+
+.headLeft{
+	float: left;
+}
+
+.headRight{
+	padding-top: 40px;
+	padding-left: 340px;
+}
+
+.currentDateTime{
+	float: right;
+}

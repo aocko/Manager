@@ -1,0 +1,13 @@
+
+^squid:S00112"FDefine and throw a dedicated exception instead of using a generic one.(èŒ
+ksquid:S2095*"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(î¨»Ñüÿÿÿÿ
+nsquid:S20774"RUse a variable binding mechanism to construct this query instead of concatenation.(î¨»Ñüÿÿÿÿ
+msquid:S2095;"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(Œæ¦Œ8şéÁˆ -
+esquid:S2095;"GUse try-with-resources or close this "ResultSet" in a "finally" clause.(Œæ¦Œ8ááÅˆ -
+]squid:S1126#"AReplace this if-then-else statement by a single return statement.(òãã şÿÿÿÿ
+ksquid:S2095 "OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(î¨»Ñüÿÿÿÿ
+psquid:S2077;"RUse a variable binding mechanism to construct this query instead of concatenation.(Œæ¦Œ8şéÁˆ -
+^squid:S2095""GUse try-with-resources or close this "ResultSet" in a "finally" clause.(¶ë‰Ş
+ksquid:S2095"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(î¨»Ñüÿÿÿÿ
+ksquid:S20954"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(î¨»Ñüÿÿÿÿ
+^squid:S2095"GUse try-with-resources or close this "ResultSet" in a "finally" clause.(¶ë‰Ş

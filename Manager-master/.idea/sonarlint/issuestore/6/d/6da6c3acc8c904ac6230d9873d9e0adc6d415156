@@ -1,0 +1,30 @@
+
+Bsquid:S1948+"&Make "user" transient or serializable.(’Ø¾ıÿÿÿÿ
+Jsquid:S1948M".Make "majorDaoUtil" transient or serializable.(É’ïíûÿÿÿÿ
+lsquid:S00100­"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(©§¤ºúÿÿÿÿ
+>squid:S1948."(Make "dbUtil" transient or serializable.(ú„çI
+`squid:HiddenFieldCheckŸ"8Rename "user" which hides the field declared at line 43.(€î›ÿÿÿÿÿ
+Ysquid:S2441Ì":Make "User" serializable or don't store it in the session.(ğàŠî8Ûí´ˆ -
+lsquid:S00100©"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÖÂºùÿÿÿÿ
+Fsquid:S1948/"*Make "gradeDao" transient or serializable.(İ¡ßæùÿÿÿÿ
+gsquid:S00100™"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(—ËÍİ
+Ysquid:UselessImportCheck"0Remove this unused import 'java.io.IOException'.(ªº»Úıÿÿÿÿ
+osquid:S00117•"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(è¸¡ıÿÿÿÿ
+osquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(şÁ¿ªøÿÿÿÿ
+ssquid:S001163"VRename this field "r_password2" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÉèŠúÿÿÿÿ
+lsquid:S00100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(şÁ¿ªøÿÿÿÿ
+rsquid:S001161"URename this field "r_password" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¢ûğÅıÿÿÿÿ
+[squid:UselessImportCheck"7Remove this unused import 'java.text.SimpleDateFormat'.(ú¡ÙÛ
+Gsquid:S1948)"+Make "majorList" transient or serializable.(‚’´âıÿÿÿÿ
+lsquid:S00100‘"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(òÔ³Œÿÿÿÿÿ
+Osquid:UselessImportCheck"+Remove this unused import 'java.util.Date'.(¸…¼ü
+[squid:HiddenFieldCheckñ"8Rename "user" which hides the field declared at line 43.(Ç­‚û
+Gsquid:S19484"+Make "gradeList" transient or serializable.(çÀ®ÿÿÿÿÿ
+Hsquid:S1948N",Make "studentDao" transient or serializable.(„œµ‹şÿÿÿÿ
+@squid:S1948-")Make "userDao" transient or serializable.(”Æ¢Ÿ
+Fsquid:S1948O"*Make "majorDao" transient or serializable.(¤×ßáıÿÿÿÿ
+Gsquid:S00108")Either remove or fill this block of code.(ıü‡Ìûÿÿÿÿ
+msquid:S001160"URename this field "r_userName" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ù¨ƒ­
+Gsquid:S1948")Make "request" transient or serializable.(íÑä™8Ûí´ˆ -
+lsquid:S00100•"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(è¸¡ıÿÿÿÿ
+osquid:S00117­"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(©§¤ºúÿÿÿÿ
