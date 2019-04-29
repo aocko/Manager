@@ -16,6 +16,7 @@
     User user = (User) session.getAttribute("currentUser");
     String userName = user.getUserName();
 %>
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
@@ -147,7 +148,7 @@
                             <ul class="dropdown-menu">
                                 <li><a href="changeDetail" >修改资料</a></li>
                                 <li><a href="#" onclick="dialogA()">修改密码</a></li>
-                                <li><a href="login.jsp">退出登录</a></li>
+                                <li><a href="user?status=exit" >退出登录</a></li>
                             </ul>
                         </li>
                     </ul>

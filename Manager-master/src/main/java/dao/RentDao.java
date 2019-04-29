@@ -184,7 +184,6 @@ public class RentDao {
                                 classDao.updateStatus(con, classId);
                                 break;
                             }
-
                         }
                     } catch (IllegalAccessException | SQLException e) {
                         e.printStackTrace();
@@ -212,5 +211,28 @@ public class RentDao {
         preparedStatement.setString(13, rent.getRentStatus());
         preparedStatement.setString(14, null);
         preparedStatement.executeUpdate();
+    }
+
+    public boolean deleteRent(Connection connection, Rent rent,SimpleDateFormat format)  {
+
+        Date date = null;
+        try {
+            date = format.parse(rent.getEndTime());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        Date now = new Date();
+        if (now.getTime() - date.getTime() > 432000000) {
+            String sql = "delete from t_rent where rentId="+rent.getRentId()+"";
+            PreparedStatement preparedStatement = null;
+            try {
+                preparedStatement = connection.prepareStatement(sql);
+                preparedStatement.executeUpdate();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return true;
+        }
+        return false;
     }
 }

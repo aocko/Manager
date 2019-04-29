@@ -25,6 +25,7 @@
 
         <global-results>
             <result name="login">/login.jsp</result>
+            <result name="index">/userIndex.jsp</result>
         </global-results>
         <action name="user" class="action.UserAction" method="login">
             <result name="error">/login.jsp</result>
@@ -142,7 +143,10 @@
         <action name="messageList" class="action.MessageAction" method="list">
         <result name="success">/userIndex.jsp</result>
             <result name="admin">/index.jsp</result>
+            <interceptor-ref name="myStack2"></interceptor-ref>
+
         </action>
+
         <action name="messageSubmit" class="action.MessageAction" method="save">
             <result name="success">/userIndex.jsp</result>
         </action>

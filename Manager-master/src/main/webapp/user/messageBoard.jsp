@@ -15,14 +15,14 @@ User user = (User) session.getAttribute("currentUser");
 String userName = user.getUserName();
 %>
 <table class="table table-hover table-bordered table-condensed table-striped" style="background-color: #ffffff;">
-    <tr>
+    <tr style=" font-size: 14px">
         <th>序号</th>
         <th>标题</th>
         <th>内容</th>
         <th>管理员回复</th>
     </tr>
     <c:forEach var="message" items="${messageList}" varStatus="status">
-        <tr>
+        <tr style=" font-size: 14px">
             <td>${status.index+1}</td>
             <td>${message.title}</td>
             <td>${message.content}</td>

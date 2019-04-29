@@ -70,10 +70,19 @@ public class UserAction extends ActionSupport implements ServletRequestAware {
     }
 
     private String newPassword;
+    private String status;
 
     private MajorDaoUtil majorDaoUtil = new MajorDaoUtil();
     private StudentDao studentDao = new StudentDao();
     MajorDao majorDao = new MajorDao();
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public List<Grade> getGradeList() {
         return gradeList;
@@ -174,6 +183,10 @@ public class UserAction extends ActionSupport implements ServletRequestAware {
     public String login() throws Exception {
 
         HttpSession session = request.getSession();
+        if (status!=null&&status.equals("exit")) {
+            session.removeAttribute("currentUser");
+            return ERROR;
+        }
         if (user == null) {
             error = "请登录!";
             return ERROR;

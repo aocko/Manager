@@ -63,6 +63,28 @@ public class ClassDao {
         }
         return classList;
     }
+    public int countclassList(Connection connection, String className, String classStatus,String pageNo) throws SQLException {
+
+
+        StringBuffer sql = new StringBuffer("select count(0) from t_class");
+        if (StringUtil.isNotEmpty(className)) {
+            sql.append(" and className like '%"+className+"%'");
+        }
+        if (StringUtil.isNotEmpty(classStatus)&&!classStatus.equals("所有")) {
+            sql.append(" and classStatus ='"+classStatus+"'");
+        }
+        if (StringUtil.isNotEmpty(pageNo)) {
+            sql.append(" limit "+(Integer.valueOf(pageNo)-1)*15+" , 15");
+        }
+        PreparedStatement pstmt = connection.prepareStatement(sql.toString().replaceFirst("and", "where"));
+        ResultSet rs = pstmt.executeQuery();
+        int count = 0;
+        while (rs.next()) {
+            count = rs.getInt(1);
+
+        }
+        return count;
+    }
     public Class getclassByid(Connection connection,String classId) throws SQLException {
         String sql = "select * from t_class where classId=?";
         PreparedStatement pstmt = connection.prepareStatement(sql);

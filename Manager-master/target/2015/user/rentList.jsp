@@ -27,7 +27,7 @@
     </thead>
     <tbody>
     <c:forEach var="rent" items="${rentList}" varStatus="status">
-        <tr>
+        <tr style=" font-size: 14px">
             <td>${status.index+1}</td>
             <td>${rent.className}</td>
             <td>${rent.classType}</td>

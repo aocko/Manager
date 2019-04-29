@@ -35,6 +35,7 @@
         })
     });
     var Id = 0;
+
     function OpenrentModal(classId) {
         $('#rent').modal('show');
         Id = classId;
@@ -42,10 +43,17 @@
 
     function rent(userName) {
         var startTime = document.getElementById("startTime").value;
-        var endTime=document.getElementById("endTime").value;
-        var reason=document.getElementById("reason").value;
+        var endTime = document.getElementById("endTime").value;
+        var reason = document.getElementById("reason").value;
 
-        $.post("rent_submit",{classId:Id,userName:userName,startTime:startTime,endTime:endTime,reason:reason},function (r) {var result=eval('('+r+')')
+        $.post("rent_submit", {
+            classId: Id,
+            userName: userName,
+            startTime: startTime,
+            endTime: endTime,
+            reason: reason
+        }, function (r) {
+            var result = eval('(' + r + ')')
             if (result.error) {
                 alert(result.error);
             } else {
@@ -81,13 +89,13 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title" id="rentModal">申请</h4>
             </div>
-            <div class="modal-body" >
+            <div class="modal-body">
                 <label>选择开始时间：</label>
-                <input type="datetime-local" class="form-control" id="startTime" name="startTime" required="required" >
+                <input type="datetime-local" class="form-control" id="startTime" name="startTime" required="required">
                 <label>选择到期时间：</label>
                 <input type="datetime-local" class="form-control" id="endTime" name="endTime" required="required">
                 <label for="reason">申请理由(请详细填写,以便管理员审核)</label>
-                <textarea class="form-control" rows="3" id="reason" name="reason"></textarea>
+                <textarea class="form-control" rows="3" id="reason" name="reason" style="resize:none"></textarea>
             </div>
             <div class="modal-footer">
                 <button class="btn btn-default  btn-info" type="button"
@@ -107,25 +115,25 @@
     <div class="form-group">
         <label for="classStatus">教室状态</label>
         <select id="classStatus" name="classStatus" required="required" class="form-control">
-         <c:forEach var="status" items="${statusList}" >
-             <option value="${status}">${status}</option>
-         </c:forEach>
+            <c:forEach var="status" items="${statusList}">
+                <option value="${status}">${status}</option>
+            </c:forEach>
         </select>
     </div>
-
     <button type="submit" class="btn btn-default btn-info">查询</button>
 </form>
 <table class="table table-hover table-bordered table-condensed table-striped" style="background-color: #ffffff;">
     <thead>
-    <tr style="font-size: 14px">
-        <th>序号</th>
-        <th>教室名称</th>
-        <th>教室类型</th>
-        <th>教室状态</th>
-        <th class="hidden-xs">教室大小</th>
-        <th class="hidden-xs">设备状态</th>
-        <th class="hidden-xs">教室备注</th>
-        <th colspan="2">操作</th>
+    <tr style="font-size: 14px;text-align: center">
+        <th style="text-align: center">序号</th>
+        <th style="text-align: center">教室名称</th>
+        <th style="text-align: center">教室类型</th>
+        <th style="text-align: center">教室状态</th>
+        <th style="text-align: center" class="hidden-xs">教室大小</th>
+        <th style="text-align: center" class="hidden-xs">设备状态</th>
+        <th style="text-align: center" class="hidden-xs">教室备注</th>
+        <th style="text-align: center" colspan="2" class="hidden-xs">操作</th>
+        <th style="text-align: center" colspan="3" class="hidden-lg">操作</th>
     </tr>
     </thead>
     <tbody>
@@ -164,7 +172,7 @@
     <ul class="pagination">
 
         <c:forEach var="pageNo" items="${pageNoList}">
-        <li><a href="#" onclick="submitQuery(${pageNo})">${pageNo}</a></li>
+            <li><a href="#" onclick="submitQuery(${pageNo})">${pageNo}</a></li>
         </c:forEach>
 
     </ul>

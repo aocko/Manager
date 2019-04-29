@@ -14,7 +14,9 @@ import util.StatusUtil;
 
 import javax.servlet.http.HttpServletResponse;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -46,7 +48,7 @@ public class RentAction extends ActionSupport {
         this.statusList = statusList;
     }
 
-    private List<String> statusList=new ArrayList<>();
+    private List<String> statusList = new ArrayList<>();
 
     public List getPageNoList() {
         return pageNoList;
@@ -199,7 +201,8 @@ public class RentAction extends ActionSupport {
     RentDao rentDao = new RentDao();
     TimetableDao timetableDao = new TimetableDao();
 
-    public String list() throws Exception {
+    public String list() throws Exception, SQLException {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         Timer timer = new Timer();
         Connection con = dbUtil.getCon();
         Rent rent = new Rent();
@@ -208,6 +211,46 @@ public class RentAction extends ActionSupport {
         rent.setClassStatus(status);
         startTime = startTime;
         endTime = endTime;
+        rentList = rentDao.rentList(con, rent);
+        rentList.removeIf(rent1 -> rentDao.deleteRent(con, rent1, format));
+
+        try {
+            rentList.forEach(r -> {
+                try {
+                    rentDao.Duplicatedetection(format, r, con);
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                Connection con2 = null;
+                try {
+                    con2 = dbUtil.getCon();
+                    List<Rent> list = rentDao.rentList(con2, rent);
+                    for (Rent rent1 : list) {
+                        try {
+                            rentDao.Duplicatedetection(format, rent1, con2);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                    try {
+                        dbUtil.closeCon(con2);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }, 0, 5000);
 
         if (userName != null) {
             rent.setUserName(userName);
@@ -215,46 +258,6 @@ public class RentAction extends ActionSupport {
             mainPage = "user/rentList.jsp";
             dbUtil.closeCon(con);
             return SUCCESS;
-        } else {
-            rentList = rentDao.rentList(con, rent);
-
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-            try {
-                rentList.forEach(r -> {
-                    try {
-                        rentDao.Duplicatedetection(format, r, con);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                });
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            timer.schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    Connection con2 = null;
-                    try {
-                        con2 = dbUtil.getCon();
-                        List<Rent> list = rentDao.rentList(con2, rent);
-                        for (Rent rent1 : list) {
-                            try {
-                                rentDao.Duplicatedetection(format, rent1, con2);
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    } finally {
-                        try {
-                            dbUtil.closeCon(con2);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-            }, 0, 5000);
         }
         mainPage = "class/classRent.jsp";
 
@@ -296,9 +299,14 @@ public class RentAction extends ActionSupport {
     public String rentList() throws Exception {
         Connection con = dbUtil.getCon();
         Timer timer = new Timer();
-        classList = classDao.getclassList(con,null);
-        if (classList.size() >= 15) {
-            classList.subList(0, 15);
+        classList = classDao.getclassList(con, null);
+        if (classList != null) {
+            for (int i = 1; i <= ((classList.size()) / 15 + 1); i++) {
+                pageNoList.add(i);
+            }
+            if (classList.size() >= 15) {
+                classList = classList.subList(0, 15);
+            }
         }
         statusList.add("所有");
         statusList.add("空闲");
@@ -306,13 +314,10 @@ public class RentAction extends ActionSupport {
         if (pageNo == null) {
             pageNo = "1";
         }
-        for (int i = 1; i <= ((classList.size())/15+1); i++) {
-            pageNoList.add(i);
-        }
         try {
             classList.forEach(c -> {
                 try {
-                  rentDao.timeTableDetection(null, c.getClassId(), con, new Date(),c);
+                    rentDao.timeTableDetection(null, c.getClassId(), con, new Date(), c);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -326,10 +331,10 @@ public class RentAction extends ActionSupport {
                 Connection con2 = null;
                 try {
                     con2 = dbUtil.getCon();
-                   List<Class> classList2 = classDao.getclassList(con2,null);
+                    List<Class> classList2 = classDao.getclassList(con2, null);
                     for (Class c : classList2) {
                         try {
-                            rentDao.timeTableDetection(null, c.getClassId(), con2, new Date(),c);
+                            rentDao.timeTableDetection(null, c.getClassId(), con2, new Date(), c);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -358,16 +363,16 @@ public class RentAction extends ActionSupport {
         if (classStatus != null) {
             StatusUtil.status(statusList, classStatus);
         }
-        classList = classDao.getclassList(connection, className, classStatus,null);
-        for (int i = 1; i <= ((classList.size())/15+1); i++) {
+       int classListsize = classDao.countclassList(connection, className, classStatus, null);
+        for (int i = 1; i <= ((classListsize) / 15 + 1); i++) {
             pageNoList.add(i);
         }
         if (pageNo == null) {
             pageNo = "1";
         }
-            classList = classDao.getclassList(connection, className, classStatus,pageNo);
+        classList = classDao.getclassList(connection, className, classStatus, pageNo);
 
-        mainPage= "user/rentClass.jsp";
+        mainPage = "user/rentClass.jsp";
         dbUtil.closeCon(connection);
         return SUCCESS;
     }
@@ -378,8 +383,18 @@ public class RentAction extends ActionSupport {
         UserDao userDao = new UserDao();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
         SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date s_Time = sdf.parse(startTime);
-        Date e_Time = sdf.parse(endTime);
+        Date s_Time = new Date();
+        Date e_Time = new Date();
+        try {
+            s_Time = sdf.parse(startTime);
+            e_Time = sdf.parse(endTime);
+        } catch (Exception e) {
+            JSONObject result = new JSONObject();
+            result.put("error", "时间格式错误！");
+            ResponseUtil.write(result, ServletActionContext.getResponse());
+            return null;
+        }
+
         Class aClass = classDao.getclassByid(con, String.valueOf(classId));
         int studentId = userDao.getStudentIdByuserName(userName, con);
         Student student = studentDao.getStudentById(con, String.valueOf(studentId));
@@ -399,12 +414,13 @@ public class RentAction extends ActionSupport {
             ResponseUtil.write(result, ServletActionContext.getResponse());
             return null;
         }
-        if ((e_Time.getTime()-s_Time.getTime()) >21600000 ) {
+        if ((e_Time.getTime() - s_Time.getTime()) > 21600000) {
             JSONObject result = new JSONObject();
             result.put("error", "最长租用时间为六个小时!");
             ResponseUtil.write(result, ServletActionContext.getResponse());
             return null;
         }
+        JSONObject result = new JSONObject();
         rent.setClassName(aClass.getClassName());
         rent.setClassType(aClass.getClassType());
         rent.setRentTime(sdf2.format(new Date()));
@@ -416,6 +432,7 @@ public class RentAction extends ActionSupport {
         rent.setReason(reason);
         rent.setUserName(userName);
         rentDao.addRent(con, rent);
+        ResponseUtil.write(result, ServletActionContext.getResponse());
 
         return null;
 
