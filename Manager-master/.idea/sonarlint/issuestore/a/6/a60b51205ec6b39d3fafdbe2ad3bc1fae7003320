@@ -1,0 +1,20 @@
+
+Vsquid:S1155˜">Use isEmpty() to check whether the collection is empty or not.(ÑÛÑ÷
+@squid:S1148"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+Qsquid:UselessImportCheck"(Remove this unused import 'model.Grade'.(Ñä¦Âıÿÿÿÿ
+?squid:S1148n"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+Osquid:S1135­"2Complete the task associated to this TODO comment.(ÕÌ®şÿÿÿÿ
+?squid:S1148S"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+Csquid:S1948"'Make "major" transient or serializable.(µ×³ğşÿÿÿÿ
+Gsquid:S1948"+Make "majorList" transient or serializable.(°æçúÿÿÿÿ
+?squid:S1148G"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+Fsquid:S1948"*Make "majorDao" transient or serializable.(›Œ©Üşÿÿÿÿ
+@squid:S1148®"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+Fsquid:S1948"*Make "gradeDao" transient or serializable.(İ¡ßæùÿÿÿÿ
+@squid:S1148ˆ"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+Vsquid:S1155œ">Use isEmpty() to check whether the collection is empty or not.(ê°ï¢
+?squid:S1148`"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+?squid:S1148s"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+?squid:S1148["#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+?squid:S1148M"#Use a logger to log this exception.(Âşÿâûÿÿÿÿ
+>squid:S1948"(Make "dbUtil" transient or serializable.(ú„çI

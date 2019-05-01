@@ -1,0 +1,5 @@
+
+Qsquid:S1118
+":Add a private constructor to hide the implicit public one.(Ÿÿ¸Ü
+Ysquid:UselessImportCheck"5Remove this unused import 'java.text.ParseException'.(ñ®ï•
+[squid:UselessImportCheck"7Remove this unused import 'java.text.SimpleDateFormat'.(ú¡ÙÛ
