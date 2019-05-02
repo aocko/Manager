@@ -259,13 +259,12 @@ public class UserAction extends ActionSupport implements ServletRequestAware {
         if (gradeId == 0) {
             error = "请选择正确的年级";
             return ERROR;
-        }
-        student.setGradeId(gradeId);
-        student.setGradeName(gradeName);
-        student.setStuName(stuName);
+        }student.setStuName(stuName);
         student.setStuNo(stuNo);
+      if (userType.equals("学生")){ student.setGradeId(gradeId);
+        student.setGradeName(gradeName);
         student.setMajorId(majorId);
-        student.setMajorName(majorName);
+        student.setMajorName(majorName);}
         boolean flag = userDao.checkName(r_userName, con);
         if (r_userName.length() > 8) {
             error = "用户名不得超过8个字符";
@@ -291,14 +290,13 @@ public class UserAction extends ActionSupport implements ServletRequestAware {
         Integer studentId=0;
         Student student1 = studentDao.getStudentBystuNo(con, stuNo, stuName);
         if (student1.getStudentId() == 0) {
-            studentId = studentDao.studentAdd(con, student);
+            studentId = studentDao.studentAdd(con, student,userType);
         } else if (userDao.selectByStudentid(con, student1.getStudentId()) != null) {
-            error = "该学生已注册，请勿重复注册！";
+            error = "该学生或教师已注册，请勿重复注册！";
             return ERROR;
         } else {
             studentId = student1.getStudentId();
         }
-
         user.setStudentId(studentId);
         userDao.registUser(user, con);
         dbUtil.closeCon(con);

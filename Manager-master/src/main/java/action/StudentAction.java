@@ -181,6 +181,9 @@ public class StudentAction extends ActionSupport implements ServletRequestAware 
             for (int i = 1; i <= ((studentList.size())/15+1); i++) {
                 pageNoList.add(i);
             }
+            if (pageNo ==null) {
+                pageNo ="1";
+            }
             if (pageNo == null&&studentList.size()>=15) {
                 studentList = studentList.subList(0, 15);
             } else {
@@ -264,27 +267,36 @@ public class StudentAction extends ActionSupport implements ServletRequestAware 
 
     public String saveChange() {
         Connection con = null;
-
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("currentUser");
         try {
             con = dbUtil.getCon();
-            mainPage = "user/changeDetail.jsp";
+            if (user.getUserType().equals("学生")) {
+                mainPage = "user/changeDetail.jsp";int majorId = majorDaoUtil.selectMajorIdByName(con, student.getMajorName());
+                int gradeId = majorDaoUtil.selectGradeIdByNameandId(con, student.getGradeName(), majorId);
+
+                majorList = majorDao.majorList(con);
+                gradeList = gradeDao.gradeList(con, majorList.get(0).getMajorId());
+                if (majorId == 0) {
+                    error = "没有该专业的信息,请选择正确的专业名称";
+                    return ERROR;
+                }
+                if (gradeId == 0) {
+                    error = "没有该年级的信息,请选择正确的年级名称";
+                    return ERROR;
+                }
+                student.setMajorId(majorId);
+                student.setGradeId(gradeId);
+            }
+
             student.setStuBirthday(java.sql.Date.valueOf(stuBirthday));
-            int majorId = majorDaoUtil.selectMajorIdByName(con, student.getMajorName());
-            int gradeId = majorDaoUtil.selectGradeIdByNameandId(con, student.getGradeName(), majorId);
-            majorList = majorDao.majorList(con);
-            gradeList = gradeDao.gradeList(con, majorList.get(0).getMajorId());
-            if (majorId == 0) {
-                error = "没有该专业的信息,请选择正确的专业名称";
-                return ERROR;
-            }
-            if (gradeId == 0) {
-                error = "没有该年级的信息,请选择正确的年级名称";
-                return ERROR;
-            }
-            student.setMajorId(majorId);
-            student.setGradeId(gradeId);
             student.setStudentId(Integer.parseInt(studentId));
-            studentDao.studentUpdate(con, student);
+            try {
+                studentDao.studentUpdate(con, student);
+            } catch (Exception e) {
+                studentDao.teacherUpdate(con, student);
+
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -324,7 +336,7 @@ public class StudentAction extends ActionSupport implements ServletRequestAware 
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("currentUser");
         student = studentDao.getStudentById(con, String.valueOf(user.getStudentId()));
-        majorList = majorDao.majorList(con);
+       if (user.getUserType().equals("学生")){ majorList = majorDao.majorList(con);
         Iterator<Major> iterator = majorList.iterator();
         int flag = 0;
         while (iterator.hasNext()) {
@@ -342,7 +354,9 @@ public class StudentAction extends ActionSupport implements ServletRequestAware 
                 it.remove();
             }
         }
-        mainPage = "user/changeDetail.jsp";
+           mainPage = "user/changeDetail.jsp";
+       }else{
+        mainPage = "user/changeDetailForTeacher.jsp";}
         dbUtil.closeCon(con);
         return SUCCESS;
     }

@@ -3,8 +3,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <div class="data_list">
     <div class="data_content">
-        <label align=center style="font-size: 40px;color: #ff874b">${error}</label>
-        <table class="table table-bordered table-hover table-striped" style="background-color: #ffffff">    <c:forEach var="timetable" items="${timetableList}" varStatus="status">
+      <div align=center> <label  style="font-size: 40px;color: #ff874b">${error}</label></div>
+    <table class="table table-bordered table-hover table-striped" style="background-color: #ffffff">    <c:forEach var="timetable" items="${timetableList}" varStatus="status">
             <tr>
                 <th>日期</th>
                 <th>一</th>

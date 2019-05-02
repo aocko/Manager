@@ -99,6 +99,9 @@ public class ClassAction extends ActionSupport  implements ServletRequestAware {
         } else {
             classList = classDao.getclassList(con,pageNo);
         }
+        if (pageNo == null) {
+            setPageNo("1");
+        }
         mainPage = "class/classList.jsp";
         dbUtil.closeCon(con);
         return SUCCESS;

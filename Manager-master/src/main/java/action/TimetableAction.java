@@ -79,11 +79,16 @@ public class TimetableAction extends ActionSupport {
 
     public String list() throws Exception {
         Connection con = dbUtil.getCon();
-
         timetableList = timetableDao.timetableList(con, classId);
         aClassId = classId;
         if (timetableList.size() == 0) {
-            error = "未找到该教室的课程表,请管理员重新添加";
+            error = "未找到该教室的课程表,请重新添加";
+            if (userName != null) {
+                error = "未找到该教室的课程表,请通知管理员重新添加";
+            }
+        }
+        if (timetableList.size() == 0&&userName != null) {
+            error = "未找到该教室的课程表,请通知管理员重新添加";
         }
         mainPage = "timetable/timetableList.jsp";
         if (userName != null) {

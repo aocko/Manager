@@ -57,9 +57,9 @@
                     if (userName != null && userName.trim() != '') {
 
                         if (result.error) {
-                            tishi.innerHTML = "<font color='red'>抱歉，" + userName + "已被注册，请更换！</font>";
+                            tishi.innerHTML = "<font color='red'>抱歉，用户名已被注册，请更换！</font>";
                         } else if (result.success) {
-                            tishi.innerHTML = "<font color='green'>恭喜，" + userName + " 可以注册！</font>"
+                            tishi.innerHTML = "<font color='green'>恭喜，用户名可以注册！</font>"
                         }
                     }
                 }
@@ -80,9 +80,29 @@
             }
         }
 
+        function usertype() {
+            var select = document.getElementById('userType');
+            var userType = select.options[select.selectedIndex].value;
+            if (userType == "老师") {
+                document.getElementById('stuNamelabel').innerText = "教师姓名";
+                document.getElementById('stuNolabel').innerText = "教工号";
+                document.getElementById('gradeNameDom').setAttribute('style', 'display:none');
+                document.getElementById('majorNameDom').setAttribute('style', 'display:none');
+            }
+            if (userType == "学生") {
+                document.getElementById('gradeNameDom').setAttribute('style', '');
+                document.getElementById('majorNameDom').setAttribute('style', '');
+            }
+        }
+
+        function keyLogin(){
+            if (event.keyCode==13){
+                document.getElementById("adminlogin").submit();
+            }
+        }
     </script>
 </head>
-<body style="background: url('bg.jpg') no-repeat top center fixed;background-size: cover;">
+<body style="background: url('bg.jpg') no-repeat top center fixed;background-size: cover;" onkeydown="keyLogin();">
 
 <div class="modal fade" id="mymodal" tabindex="-1">
     <div class="modal-dialog">
@@ -146,33 +166,33 @@
                     <div class="control-group">
                         <label class="control-label" for="userType">选择用户类别</label>
                         <select id="userType" name="userType" required="required"
-                                style="height: 30px;width: 206px;margin-left: 20px">
+                                style="height: 30px;width: 206px;margin-left: 20px" onchange="usertype()">
                             <option value="学生">学生</option>
                             <option value="老师">老师</option>
                         </select>
                     </div>
                     <div class="control-group">
-                        <label class="control-label" for="stuName">学生姓名</label>
+                        <label class="control-label" for="stuName" id="stuNamelabel">学生姓名</label>
                         <div class="controls">
                             <input style="margin-top: 6px;height: 30px" type="text" id="stuName" name="stuName"
-                                   placeholder="学生姓名" required="required">
+                                   placeholder="姓名" required="required">
                         </div>
                     </div>
                     <div class="control-group">
-                        <label class="control-label" for="stuNo">学号</label>
+                        <label class="control-label" for="stuNo" id="stuNolabel">学号</label>
                         <div class="controls">
-                            <input style="margin-top: 6px;height: 30px" type="text" id="stuNo" name="stuNo"
-                                   placeholder="学号" required="required">
+                            <input style="margin-top: 6px;height: 30px" type="number" id="stuNo" name="stuNo"
+                                   placeholder="学号/教工号" required="required">
                         </div>
                     </div>
-                    <div class="control-group">
+                    <div class="control-group" id="gradeNameDom">
                         <label class="control-label" for="gradeName">所在班级</label>
                         <div class="controls">
                             <select id="gradeName" name="gradeName" required="required">
                             </select>
                         </div>
                     </div>
-                    <div class="control-group">
+                    <div class="control-group" id="majorNameDom">
                         <label class="control-label" for="majorName">所在班级</label>
                         <div class="controls">
                             <select id="majorName" name="majorName" required="required">
@@ -193,17 +213,7 @@
 </form>
 
 <div class="container" style="margin-top: 100px">
-    <div id="login-wrapper">
-        <div class="row">
-            <div class="span4 offset4">
-                <button style="float: right;position: relative;top: 30px" class="btn btn-primary btn-sm"
-                        data-toggle="modal"
-                        data-target="#register">
-                    注册用户
-                </button>
-            </div>
-        </div>
-    </div>
+
     <div class="row">
         <div class="span4 offset4">
             <form id=adminlogin method=post
@@ -211,32 +221,36 @@
                 <div style="border-radius: 10px 10px 10px 10px;font-size: 13px;
                     background-color: #ffffff;
                     padding: 20px;">
-                    <div><h1>高校教室管理系统
+                    <div align="center"><h1>高校教室管理系统
                     </h1></div>
                     <div class="form-group">
                         <label>用户名</label>
                         <input type="text" id="username" name="user.userName" placeholder="用户名"
-                               style="width: 300px;height: 30px">
+                               style="width: 100%;height: 30px">
                     </div>
                     <div class="form-group">
                         <label>密码</label>
-                        <input type="password" id="password" name="user.password" style="width: 300px;height: 30px"
+                        <input type="password" id="password" name="user.password" style="width: 100%;height: 30px"
                                placeholder="密码">
                     </div>
                     <div class="form-group">
                         <label>验证码</label>
-                        <input type="text" id="imageCode" name="imageCode" style="width: 300px;height: 30px"
+                        <input type="text" id="imageCode" name="imageCode" style="height: 30px"
                                placeholder="验证码">
-                        <div style="height: 30px;margin-top:5px;margin-bottom:5px"><img
+                        <img    style="margin-bottom: 10px"
                                 onclick="javascript:loadimage();"
                                 title="换一张试试" name="randImage"
                                 id="randImage" src="image.jsp" width="90"
-                                height="30" border="1" align="right"
-                        ></div>
+                                height="30" border="1"
+                        >
                     </div>
-                    <div><input style="float: right" id="btnLogin" name="btnLogin" value="登录"
-                                class="btn btn btn-primary "
-                                type="button" onclick="javascript:adminlogin.submit();return false;"></div>
+                    <div align="center"><input id="btnLogin" name="btnLogin" value="登录"  style="margin-right: 30px"
+                                               class="btn  btn-primary " id="login"
+                                               type="button" onclick="javascript:adminlogin.submit();return false;">
+                        <input class="btn btn btn-primary "
+                               data-toggle="modal" type="button"
+                               data-target="#register" value="注册">
+                    </div>
                     <div>
                         <div class="row"></div>
                     </div>

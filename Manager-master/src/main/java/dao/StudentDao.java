@@ -1,6 +1,7 @@
 package dao;
 
 import model.Student;
+import model.User;
 import util.StringUtil;
 
 import java.sql.*;
@@ -42,8 +43,10 @@ public class StudentDao {
             student1.setMajorName(rs.getString("majorName"));
             student1.setGradeId(rs.getInt("gradeId"));
             student1.setGradeName(rs.getString("gradeName"));
+            student1.setType(rs.getString("Type"));
             studentList.add(student1);
         }
+        studentList.removeIf(student1 -> "老师".equals(student1.getType()));
         return studentList;
     }
 
@@ -109,7 +112,7 @@ public class StudentDao {
 
 
     public int studentAdd(Connection con, Student student) throws SQLException {
-        String sql = "insert into t_student values(null,?,?,?,?,?,?,?,?,?,?,?) ";
+        String sql = "insert into t_student values(null,?,?,?,?,?,?,?,?,?,?,?,?) ";
         PreparedStatement preparedStatement = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         preparedStatement.setInt(1, student.getStuNo());
         preparedStatement.setString(2, student.getStuName());
@@ -122,11 +125,36 @@ public class StudentDao {
         preparedStatement.setString(9, student.getMajorName());
         preparedStatement.setInt(10, student.getGradeId());
         preparedStatement.setString(11, student.getGradeName());
+        preparedStatement.setString(12, "学生");
        preparedStatement.executeUpdate();
         ResultSet rs = preparedStatement.getGeneratedKeys();
         int result=0;
         if (rs.next()) {
        result = rs.getInt(1);
+        }
+        return result;
+    }
+
+    public int studentAdd(Connection con, Student student, String userType) throws SQLException {
+        String sql = "insert into t_student values(null,?,?,?,?,?,?,?,?,?,?,?,?) ";
+        PreparedStatement preparedStatement = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        preparedStatement.setInt(1, student.getStuNo());
+        preparedStatement.setString(2, student.getStuName());
+        preparedStatement.setString(3, student.getStuSex());
+        preparedStatement.setString(4, student.getStuNation());
+        preparedStatement.setDate(5, student.getStuBirthday());
+        preparedStatement.setString(6, student.getStuZzmm());
+        preparedStatement.setString(7, student.getStuDesc());
+        preparedStatement.setInt(8, student.getMajorId());
+        preparedStatement.setString(9, student.getMajorName());
+        preparedStatement.setInt(10, student.getGradeId());
+        preparedStatement.setString(11, student.getGradeName());
+        preparedStatement.setString(12, userType);
+        preparedStatement.executeUpdate();
+        ResultSet rs = preparedStatement.getGeneratedKeys();
+        int result=0;
+        if (rs.next()) {
+            result = rs.getInt(1);
         }
         return result;
     }
@@ -146,6 +174,18 @@ public class StudentDao {
         preparedStatement.setInt(10, student.getGradeId());
         preparedStatement.setString(11, student.getGradeName());
         preparedStatement.setInt(12, student.getStudentId());
+
+        return preparedStatement.executeUpdate();
+    }
+    public int teacherUpdate(Connection con, Student student) throws Exception {
+        String sql = "update t_student set stuNo=?,stuName=?,stuSex=?,stuNation=? ,stuBirthday=? where studentId=?";
+        PreparedStatement preparedStatement = con.prepareStatement(sql);
+        preparedStatement.setInt(1, student.getStuNo());
+        preparedStatement.setString(2, student.getStuName());
+        preparedStatement.setString(3, student.getStuSex());
+        preparedStatement.setString(4, student.getStuNation());
+        preparedStatement.setDate(5, student.getStuBirthday());
+        preparedStatement.setInt(6, student.getStudentId());
 
         return preparedStatement.executeUpdate();
     }

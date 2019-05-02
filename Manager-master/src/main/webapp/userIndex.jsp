@@ -121,7 +121,7 @@
     </div>
 </div>
 <div class="container" >
-    <div class="label label-success" id="today" style="font-size:14px;float: right;margin-right: 5px"></div>
+    <div class="label label-success hidden-xs" id="today" style="font-size:14px;float: right;margin-right: 5px"></div>
 
     <div class="row well" style="background:white;min-height: 650px" >
 

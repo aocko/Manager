@@ -1191,7 +1191,7 @@
     </column>
     <column id="300" parent="281" name="majorId">
       <Position>5</Position>
-      <DataType>int(20)|0s</DataType>
+      <DataType>int(10)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
     <index id="301" parent="281" name="majorId">
@@ -1250,7 +1250,7 @@
     </column>
     <column id="311" parent="283" name="answer">
       <Position>4</Position>
-      <DataType>varchar(100)|0s</DataType>
+      <DataType>varchar(200)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
     <column id="312" parent="283" name="userName">
@@ -1428,159 +1428,165 @@
       <DataType>varchar(20)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="346" parent="285" name="majorId">
+    <column id="346" parent="285" name="Type">
+      <Position>13</Position>
+      <DataType>varchar(20)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <index id="347" parent="285" name="majorId">
       <ColNames>majorId</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="347" parent="285" name="gradeId">
+    <index id="348" parent="285" name="gradeId">
       <ColNames>gradeId</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="348" parent="285" name="PRIMARY">
+    <key id="349" parent="285" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>studentId</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="349" parent="285" name="t_student_ibfk_2">
+    <foreign-key id="350" parent="285" name="t_student_ibfk_2">
       <ColNames>majorId</ColNames>
       <RefSchemaName>db_studentinfo</RefSchemaName>
       <RefTableName>t_major</RefTableName>
       <RefColNames>majorId</RefColNames>
     </foreign-key>
-    <foreign-key id="350" parent="285" name="t_student_ibfk_1">
+    <foreign-key id="351" parent="285" name="t_student_ibfk_1">
       <ColNames>gradeId</ColNames>
       <RefSchemaName>db_studentinfo</RefSchemaName>
       <RefTableName>t_grade</RefTableName>
       <RefColNames>gradeId</RefColNames>
     </foreign-key>
-    <column id="351" parent="286" name="timetableId">
+    <column id="352" parent="286" name="timetableId">
       <Position>1</Position>
       <DataType>int(10)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="352" parent="286" name="classId">
+    <column id="353" parent="286" name="classId">
       <Position>2</Position>
       <DataType>int(10)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="353" parent="286" name="week">
+    <column id="354" parent="286" name="week">
       <Position>3</Position>
       <DataType>varchar(20)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="354" parent="286" name="first">
+    <column id="355" parent="286" name="first">
       <Position>4</Position>
       <DataType>varchar(20)|0s</DataType>
       <DefaultExpression>&apos;无课程&apos;</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="355" parent="286" name="second">
+    <column id="356" parent="286" name="second">
       <Position>5</Position>
       <DataType>varchar(20)|0s</DataType>
       <DefaultExpression>&apos;无课程&apos;</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="356" parent="286" name="third">
+    <column id="357" parent="286" name="third">
       <Position>6</Position>
       <DataType>varchar(20)|0s</DataType>
       <DefaultExpression>&apos;无课程&apos;</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="357" parent="286" name="fourth">
+    <column id="358" parent="286" name="fourth">
       <Position>7</Position>
       <DataType>varchar(20)|0s</DataType>
       <DefaultExpression>&apos;无课程&apos;</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="358" parent="286" name="fifth">
+    <column id="359" parent="286" name="fifth">
       <Position>8</Position>
       <DataType>varchar(20)|0s</DataType>
       <DefaultExpression>&apos;无课程&apos;</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="359" parent="286" name="sixth">
+    <column id="360" parent="286" name="sixth">
       <Position>9</Position>
       <DataType>varchar(20)|0s</DataType>
       <DefaultExpression>&apos;无课程&apos;</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="360" parent="286" name="seventh">
+    <column id="361" parent="286" name="seventh">
       <Position>10</Position>
       <DataType>varchar(20)|0s</DataType>
       <DefaultExpression>&apos;无课程&apos;</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="361" parent="286" name="eighth">
+    <column id="362" parent="286" name="eighth">
       <Position>11</Position>
       <DataType>varchar(20)|0s</DataType>
       <DefaultExpression>&apos;无课程&apos;</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="362" parent="286" name="ninth">
+    <column id="363" parent="286" name="ninth">
       <Position>12</Position>
       <DataType>varchar(20)|0s</DataType>
       <DefaultExpression>&apos;无课程&apos;</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="363" parent="286" name="tenth">
+    <column id="364" parent="286" name="tenth">
       <Position>13</Position>
       <DataType>varchar(20)|0s</DataType>
       <DefaultExpression>&apos;无课程&apos;</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="364" parent="286" name="eleventh">
+    <column id="365" parent="286" name="eleventh">
       <Position>14</Position>
       <DataType>varchar(20)|0s</DataType>
       <DefaultExpression>&apos;无课程&apos;</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="365" parent="286" name="twelfth">
+    <column id="366" parent="286" name="twelfth">
       <Position>15</Position>
       <DataType>varchar(20)|0s</DataType>
       <DefaultExpression>&apos;无课程&apos;</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="366" parent="286" name="thirteenth">
+    <column id="367" parent="286" name="thirteenth">
       <Position>16</Position>
       <DataType>varchar(20)|0s</DataType>
       <DefaultExpression>&apos;无课程&apos;</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="367" parent="286" name="PRIMARY">
+    <key id="368" parent="286" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>timetableId</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="368" parent="287" name="userId">
+    <column id="369" parent="287" name="userId">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="369" parent="287" name="userName">
+    <column id="370" parent="287" name="userName">
       <Position>2</Position>
       <DataType>varchar(20)|0s</DataType>
+      <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="370" parent="287" name="password">
+    <column id="371" parent="287" name="password">
       <Position>3</Position>
       <DataType>varchar(20)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="371" parent="287" name="userType">
+    <column id="372" parent="287" name="userType">
       <Position>4</Position>
       <DataType>varchar(20)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="372" parent="287" name="studentId">
+    <column id="373" parent="287" name="studentId">
       <Position>5</Position>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="373" parent="287" name="PRIMARY">
+    <key id="374" parent="287" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>userId</ColNames>
       <Primary>1</Primary>

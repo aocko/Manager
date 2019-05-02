@@ -30,7 +30,7 @@ String userName = user.getUserName();
         </tr>
     </c:forEach>
 </table>
-<form action="messageSubmit">
+<form action="messageSubmit" method="post">
     <div class="row">
         <div class="col-md-3 col-md-offset-4">
             <div class="form-group">

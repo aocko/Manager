@@ -91,6 +91,7 @@ public class MessageAction extends ActionSupport {
             message.setAnswer("尚未回复");
         }
         messageDao.sendMessage(con, message,userName);
+        messageList = messageDao.getList(con, userName);
         mainPage = "user/messageBoard.jsp";
         dbutil.closeCon(con);
         return SUCCESS;
