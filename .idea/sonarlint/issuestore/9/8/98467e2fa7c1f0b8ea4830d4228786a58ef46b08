@@ -1,13 +1,0 @@
-
-fsquid:S20953"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(µÏ‰ƒ
-ksquid:S2095R"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(î¨»Ñüÿÿÿÿ
-^squid:S2095"GUse try-with-resources or close this "ResultSet" in a "finally" clause.(¶ë‰Ş
-ksquid:S2095"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(ª€şøÿÿÿÿ
-fsquid:S2095>"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(µÏ‰ƒ
-ksquid:S2095K"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(î¨»Ñüÿÿÿÿ
-^squid:S2095#"GUse try-with-resources or close this "ResultSet" in a "finally" clause.(¶ë‰Ş
-usquid:S14889"^Immediately return this expression instead of assigning it to the temporary variable "result".(áä•’
-csquid:S00112I"FDefine and throw a dedicated exception instead of using a generic one.(Ğ“ßòøÿÿÿÿ
-ksquid:S2095!"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(ª€şøÿÿÿÿ
-usquid:S1488E"^Immediately return this expression instead of assigning it to the temporary variable "result".(áä•’
-ksquid:S2095X"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(î¨»Ñüÿÿÿÿ

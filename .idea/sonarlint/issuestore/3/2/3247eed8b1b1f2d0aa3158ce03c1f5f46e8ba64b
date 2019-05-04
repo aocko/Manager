@@ -1,8 +1,0 @@
-
-Jsquid:S1948(",Make "messageDao" transient or serializable.(•©û8·ˆı± -
-Xsquid:S1191"5Use classes from the Java API instead of Sun classes.(Ì¢×€úÿÿÿÿ8ÃÙ¯ -
-Fsquid:S1948*"(Make "dbutil" transient or serializable.(¹ñÚÖ8ÃÙ¯ -
-Lsquid:S1948")Make "message" transient or serializable.(™ÁÊÒÿÿÿÿÿ8ÉÊÖ° -
-Psquid:S1948"-Make "messageList" transient or serializable.(ßş©èøÿÿÿÿ8ÉÊÖ° -
-qsquid:UselessImportCheck"ARemove this unused import 'com.sun.net.httpserver.Authenticator'.(Ì¢×€úÿÿÿÿ8ÃÙ¯ -
-\squid:UselessImportCheck	",Remove this unused import 'sun.applet.Main'.(ğÅÛ­ûÿÿÿÿ8ÃÙ¯ -
