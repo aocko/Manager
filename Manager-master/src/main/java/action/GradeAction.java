@@ -84,20 +84,11 @@ public class GradeAction extends ActionSupport {
             e.printStackTrace();
         }
         if (StringUtil.isNotEmpty(gradeId)) {
-
-
             try {
                 grade = gradeDao.getGradeById(con, gradeId);
             } catch (Exception e1) {
                 e1.printStackTrace();
             }
-
-            try {
-                dbUtil.closeCon(con);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
         }
 
         try {
@@ -178,11 +169,11 @@ public class GradeAction extends ActionSupport {
                 resultJson.put("error", "年级下有学生数据,无法删除!");
                 ResponseUtil.write(resultJson, ServletActionContext.getResponse());
                 return "delete";
-            }else {   gradeDao.gradeDelete(con, Integer.parseInt(gradeId));
-                resultJson.put("success", true);}
-
-
-
+            } else {
+                gradeDao.gradeDelete(con, Integer.parseInt(gradeId));
+                resultJson.put("success", true);
+            }
+            ResponseUtil.write(resultJson, ServletActionContext.getResponse());
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

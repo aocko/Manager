@@ -59,6 +59,8 @@ public class RentDao {
         }
         return rentList;
     }
+
+
     public List<Rent> rentListByuser(Connection con, Rent rent) throws SQLException, ParseException {
         String sql = "select * from t_rent where userName='"+rent.getUserName()+"'";
         PreparedStatement pstmt = con.prepareStatement(sql);
@@ -193,6 +195,32 @@ public class RentDao {
         });
     }
 
+    public boolean timetableDetectionForSubmit(int classId, Connection con, Date now) throws SQLException {
+        String weekday = DateUtil.getWeekDays(now);
+        List<Timetable> timetableList = timetableDao.timetableList(con, String.valueOf(classId));
+        boolean flag=true;
+        for (Timetable timetable : timetableList) {
+            if (timetable.getWeek().equals(weekday)) {
+                int timeOfnow = DateUtil.getSecond(now);
+                java.lang.Class clazz = timetable.getClass();
+                Field[] fields = clazz.getDeclaredFields();
+                for (int i = 3; i < fields.length; i++) {
+                    Field f = fields[i];
+                    f.setAccessible(true);
+                    try {
+                        if (!f.get(timetable).equals("无课程")) {
+                            if (timeOfnow < time[(i - 3) * 2 + 1] && timeOfnow > time[(i - 3) * 2]) {
+                                flag = false;
+                            }
+                        }
+                    } catch (IllegalAccessException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+        return flag;
+    }
     public void addRent(Connection con, Rent rent) throws SQLException, ParseException {
         String sql = "insert into t_rent values(null,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         PreparedStatement preparedStatement = con.prepareStatement(sql);

@@ -52,6 +52,15 @@ public class UserAction extends ActionSupport implements ServletRequestAware {
     private Integer stuNo;
 
     private String oldPassword;
+    private String majorId;
+
+    public String getMajorId() {
+        return majorId;
+    }
+
+    public void setMajorId(String majorId) {
+        this.majorId = majorId;
+    }
 
     public String getOldPassword() {
         return oldPassword;
@@ -236,7 +245,11 @@ public class UserAction extends ActionSupport implements ServletRequestAware {
 
     public String gradeList() throws Exception {
         Connection con = dbUtil.getCon();
-        gradeList = gradeDao.gradeList(con);
+        if (majorId != null) {
+            gradeList = gradeDao.gradeList(con, Integer.parseInt(majorId));
+        }else {
+            gradeList = gradeDao.gradeList(con);
+        }
         majorList = majorDao.majorList(con);
         JSONObject result = new JSONObject();
         result.put("gradeList", gradeList);

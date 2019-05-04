@@ -158,7 +158,7 @@
                     课程
                 </button>
             </td>
-            <td align="center" class="visible-xs-block">
+            <td align="center" class="visible-xs">
                 <button class="btn btn-primary btn-xs btn-info xq" id="xq" type="button" code="${aClass.classId}">查看
                 </button>
             </td>

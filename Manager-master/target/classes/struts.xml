@@ -152,5 +152,6 @@
         </action>
         <action name="answer" class="action.MessageAction" method="answer">
         </action>
+        <action name="queryBadge" class="action.RentAction" method="queryBadge"/>
     </package>
 </struts>

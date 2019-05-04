@@ -21,6 +21,7 @@ function reject() {
         if (result.error) {
             alert(result.error);
         } else {
+            window.location.href = "${pageContext.request.contextPath}/class_rent"
         }
 
     });
@@ -37,6 +38,8 @@ function acceptRent(rentId, classId) {
             alert(result.error);
         } else {
             alert("处理成功");
+            window.location.href = "${pageContext.request.contextPath}/class_rent"
+
         }
 
     });
@@ -46,8 +49,11 @@ window.onload = function () {
     var table = document.getElementById("table");
     var rows = table.rows;
     for (var i = 1; i < rows.length; i++) {
-        if ((rows[i].cells[10].innerText.trim()) == "拒绝") {
-            rows[i].cells[11].children[0].setAttribute("disabled", "disabled");
+        if ((rows[i].cells[11].innerText.trim()) == "拒绝") {
+            rows[i].cells[13].children[0].setAttribute("disabled", "disabled");
+        }
+        if ((rows[i].cells[11].innerText.trim()) == "同意") {
+            rows[i].cells[12].children[0].setAttribute("disabled", "disabled");
         }
     }
 }
@@ -62,7 +68,7 @@ window.onload = function () {
                 <h4 class="modal-title" id="myModalLabel1">拒绝</h4>
             </div>
             <div class="modal-body"><label for="rejectReason">拒绝理由(请详细填写,以便管理员审核)</label>
-                <textarea class="form-control" rows="3" id="rejectReason" name="rejectReason" style="resize:none;"></textarea></div>
+                <textarea class="form-control" rows="3" id="rejectReason" name="rejectReason" style="width:100%;resize:none;"></textarea></div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default btn-danger"  onclick="reject()">拒绝</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
@@ -98,13 +104,9 @@ window.onload = function () {
                         <td>
                             <input type="datetime-local" id="endTime" name="endTime" value="${endTime}">
                         </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" align="center">
-                        </td>
                         <td colspan="2">
-                            <button class="btn btn-primary" type="submit">查询</button>
-                        </td>
+                        <button class="btn btn-primary"  style="margin-bottom: 12px" type="submit">查询</button>
+                    </td>
                     </tr>
                 </table>
             </form>

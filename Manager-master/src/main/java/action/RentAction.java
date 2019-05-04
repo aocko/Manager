@@ -363,7 +363,7 @@ public class RentAction extends ActionSupport {
         if (classStatus != null) {
             StatusUtil.status(statusList, classStatus);
         }
-       int classListsize = classDao.countclassList(connection, className, classStatus, null);
+        int classListsize = classDao.countclassList(connection, className, classStatus, null);
         for (int i = 1; i <= ((classListsize) / 15 + 1); i++) {
             pageNoList.add(i);
         }
@@ -420,6 +420,12 @@ public class RentAction extends ActionSupport {
             ResponseUtil.write(result, ServletActionContext.getResponse());
             return null;
         }
+        if (!rentDao.timetableDetectionForSubmit(classId, con, s_Time) || !rentDao.timetableDetectionForSubmit(classId, con, e_Time)) {
+            JSONObject result = new JSONObject();
+            result.put("error", "申请时间有课程，请勿与课程冲突！");
+            ResponseUtil.write(result, ServletActionContext.getResponse());
+            return null;
+        }
         JSONObject result = new JSONObject();
         rent.setClassName(aClass.getClassName());
         rent.setClassType(aClass.getClassType());
@@ -436,6 +442,19 @@ public class RentAction extends ActionSupport {
 
         return null;
 
+    }
+    public String queryBadge() throws Exception {
+        Connection connection = dbUtil.getCon();
+        int badge = 0;
+        for (Rent rent1 : rentDao.rentList(connection, rent)) {
+            if (rent1.getRentStatus().equals("未处理")) {
+                badge += 1;
+            }
+        }
+        JSONObject result = new JSONObject();
+        result.put("badge", badge);
+        ResponseUtil.write(result, ServletActionContext.getResponse());
+        return null;
     }
 
 }

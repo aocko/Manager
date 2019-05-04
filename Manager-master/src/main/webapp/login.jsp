@@ -26,7 +26,7 @@
                 }
                 ;
                 for (var j = 0; j < result.majorList.length; j++) {
-                    majorName.innerHTML += "<option  value='" + result.majorList[j].majorName + "'>" + result.majorList[j].majorName + "</option>";
+                    majorName.innerHTML += "<option id='" + result.majorList[j].majorId + "' value='" + result.majorList[j].majorName + "'>" + result.majorList[j].majorName + "</option>";
                 }
                 ;
             }
@@ -99,6 +99,25 @@
             if (event.keyCode==13){
                 document.getElementById("adminlogin").submit();
             }
+        }
+        function queryGrade() {
+            var select=document.getElementById('majorName');
+            var m_Name = select.options[select.selectedIndex].getAttribute("id");
+            $.ajax({
+                url: "gradeList",
+                data : {"majorId":m_Name},
+                type: "post",
+                success: function (result) {
+                    var result = eval('(' + result + ')');
+                    var gradeName = document.getElementById("gradeName");
+                    var majorName = document.getElementById("majorName");
+                    gradeName.innerHTML = "";
+                    for (var i = 0; i < result.gradeList.length; i++) {
+                        gradeName.innerHTML += "<option  value='" + result.gradeList[i].gradeName + "'>" + result.gradeList[i].gradeName + "</option>";
+                    }
+                }
+            });
+
         }
     </script>
 </head>
@@ -185,17 +204,17 @@
                                    placeholder="学号/教工号" required="required">
                         </div>
                     </div>
-                    <div class="control-group" id="gradeNameDom">
-                        <label class="control-label" for="gradeName">所在班级</label>
+                    <div class="control-group" id="majorNameDom">
+                        <label class="control-label" for="majorName">所在专业</label>
                         <div class="controls">
-                            <select id="gradeName" name="gradeName" required="required">
+                            <select id="majorName" name="majorName" required="required" onchange="queryGrade()">
                             </select>
                         </div>
                     </div>
-                    <div class="control-group" id="majorNameDom">
-                        <label class="control-label" for="majorName">所在班级</label>
+                    <div class="control-group" id="gradeNameDom">
+                        <label class="control-label" for="gradeName">所在年级</label>
                         <div class="controls">
-                            <select id="majorName" name="majorName" required="required">
+                            <select id="gradeName"  required="required">
                             </select>
                         </div>
                     </div>

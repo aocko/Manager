@@ -50,7 +50,7 @@
             </tr>
             <tr>
                 <td>专业名称</td>
-                <td><select id="majorName" name="majorName">
+                <td><select id="grade.majorName" name="grade.majorName">
                     <option value="未选择">请选择专业...</option>
                     <c:forEach var="major" items="${majorList}">
                         <option value="${major.majorName}">${major.majorName}</option>
