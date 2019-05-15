@@ -5,9 +5,11 @@ import dao.*;
 import model.Class;
 import model.Rent;
 import model.Student;
+import model.Timetable;
 import net.sf.json.JSON;
 import net.sf.json.JSONObject;
 import org.apache.struts2.ServletActionContext;
+import util.DateUtil;
 import util.DbUtil;
 import util.ResponseUtil;
 import util.StatusUtil;
@@ -39,6 +41,15 @@ public class RentAction extends ActionSupport {
     private String classStatus;
     private List<Integer> pageNoList = new ArrayList<>();
     private String pageNo;
+    private int week;
+
+    public int getWeek() {
+        return week;
+    }
+
+    public void setWeek(int week) {
+        this.week = week;
+    }
 
     public List<String> getStatusList() {
         return statusList;
@@ -140,6 +151,7 @@ public class RentAction extends ActionSupport {
 
 
     private ClassDao classDao = new ClassDao();
+    private Timetable2Dao timetable2Dao = new Timetable2Dao();
 
     public String getRentTime() {
         return rentTime;
@@ -203,7 +215,6 @@ public class RentAction extends ActionSupport {
 
     public String list() throws Exception, SQLException {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-        Timer timer = new Timer();
         Connection con = dbUtil.getCon();
         Rent rent = new Rent();
         rent.setStartTime(startTime);
@@ -213,7 +224,6 @@ public class RentAction extends ActionSupport {
         endTime = endTime;
         rentList = rentDao.rentList(con, rent);
         rentList.removeIf(rent1 -> rentDao.deleteRent(con, rent1, format));
-
         try {
             rentList.forEach(r -> {
                 try {
@@ -226,31 +236,7 @@ public class RentAction extends ActionSupport {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                Connection con2 = null;
-                try {
-                    con2 = dbUtil.getCon();
-                    List<Rent> list = rentDao.rentList(con2, rent);
-                    for (Rent rent1 : list) {
-                        try {
-                            rentDao.Duplicatedetection(format, rent1, con2);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                } finally {
-                    try {
-                        dbUtil.closeCon(con2);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }, 0, 5000);
+
 
         if (userName != null) {
             rent.setUserName(userName);
@@ -270,11 +256,12 @@ public class RentAction extends ActionSupport {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         Rent r = rentDao.getRentById(con, rentId);
         mainPage = "class/classRent.jsp";
-        Date date = format.parse(r.getEndTime());
+        Date startTime = format.parse(r.getStartTime());
+        Date endTime = format.parse(r.getEndTime());
         Date now = new Date();
         rentList = rentDao.rentList(con, null);
         JSONObject result = new JSONObject();
-        if (now.compareTo(date) > 0) {
+        if (now.compareTo(endTime) > 0) {
             result.put("error", "申请已超时");
             ResponseUtil.write(result, ServletActionContext.getResponse());
             return ERROR;
@@ -287,6 +274,24 @@ public class RentAction extends ActionSupport {
         }
         rentDao.updaterentStatus(con, rentId, rentStatus, rejectReason);
         if (rentStatus.equals("同意")) {
+            List<Timetable> timetableList = timetable2Dao.timetable2List(con, String.valueOf(r.getClassId()));
+
+            if (timetableList.size() == 0) {
+                List<Timetable> timetableList2 = new ArrayList<>();
+                String[] weekdays = {"星期一", "星期二", "星期三", "星期四", "星期五"};
+                for (int i=0;i<5;i++){
+                    Timetable timetable = new Timetable();
+                    timetable.setWeek(weekdays[i]);
+                    timetableList2.add(timetable);
+                }
+                timetable2Dao.saveTimetable2List(con, String.valueOf(r.getClassId()), timetableList2);
+            }
+            List<Timetable> timetableList2 = timetable2Dao.timetable2List(con, String.valueOf(r.getClassId()));
+            List<Timetable>  timetableList1=   rentDao.timetableDetectionForAccept(rentDao.timetableDetectionForAccept(timetableList2, con, startTime), con, endTime);
+            try {
+                timetable2Dao.timetable2ListUpdate(con, String.valueOf(r.getClassId()), timetableList1);
+            } catch (Exception e) {
+            }
             rentDao.updateAgreeStatus(con, rentId, classId);
         }
         rentList = rentDao.rentList(con, null);
@@ -325,31 +330,7 @@ public class RentAction extends ActionSupport {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                Connection con2 = null;
-                try {
-                    con2 = dbUtil.getCon();
-                    List<Class> classList2 = classDao.getclassList(con2, null);
-                    for (Class c : classList2) {
-                        try {
-                            rentDao.timeTableDetection(null, c.getClassId(), con2, new Date(), c);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                } finally {
-                    try {
-                        dbUtil.closeCon(con2);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }, 0, 5000);
+
         mainPage = "user/rentClass.jsp";
         dbUtil.closeCon(con);
         return SUCCESS;
@@ -383,17 +364,36 @@ public class RentAction extends ActionSupport {
         UserDao userDao = new UserDao();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
         SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        JSONObject result = new JSONObject();
+        if (week != 0) {
+            Date now = new Date();
+            int weekday = DateUtil.getweek(now);
+            if (weekday > week) {
+                result.put("error", "时间错误！只允许预约本星期！");
+                ResponseUtil.write(result, ServletActionContext.getResponse());
+                return null;
+            }
+            now= DateUtil.getNow();
+            int[] time = rentDao.time;
+            Date date =new Date(now.getTime()+time[2*(Integer.parseInt(startTime)-1)]*1000+(week-weekday)*24*60*60*1000);
+            Date date2 =new Date(now.getTime()+time[2*(Integer.parseInt(endTime)-1)+1]*1000+(week-weekday)*24*60*60*1000);
+
+            startTime = sdf.format(date);
+            endTime = sdf.format(date2);
+        }
+
         Date s_Time = new Date();
         Date e_Time = new Date();
         try {
             s_Time = sdf.parse(startTime);
             e_Time = sdf.parse(endTime);
         } catch (Exception e) {
-            JSONObject result = new JSONObject();
             result.put("error", "时间格式错误！");
             ResponseUtil.write(result, ServletActionContext.getResponse());
             return null;
         }
+
+
 
         Class aClass = classDao.getclassByid(con, String.valueOf(classId));
         int studentId = userDao.getStudentIdByuserName(userName, con);
@@ -403,30 +403,26 @@ public class RentAction extends ActionSupport {
         rent.setRentStatus("未处理");
         rent.setClassId(classId);
         if (s_Time.getTime() < ((new Date()).getTime() + 21600000)) {
-            JSONObject result = new JSONObject();
-            result.put("error", "为保证教室使用不冲突,请开始时间设置为6小时之后");
+
+            result.put("error", "为保证教室使用不冲突,请开始时间设置为6小时之后！");
             ResponseUtil.write(result, ServletActionContext.getResponse());
             return null;
         }
         if (s_Time.getTime() > e_Time.getTime()) {
-            JSONObject result = new JSONObject();
-            result.put("error", "错误!开始时间必须小于结束时间");
+            result.put("error", "错误！开始时间必须小于结束时间！");
             ResponseUtil.write(result, ServletActionContext.getResponse());
             return null;
         }
         if ((e_Time.getTime() - s_Time.getTime()) > 21600000) {
-            JSONObject result = new JSONObject();
-            result.put("error", "最长租用时间为六个小时!");
+            result.put("error", "最长租用时间为六个小时！");
             ResponseUtil.write(result, ServletActionContext.getResponse());
             return null;
         }
         if (!rentDao.timetableDetectionForSubmit(classId, con, s_Time) || !rentDao.timetableDetectionForSubmit(classId, con, e_Time)) {
-            JSONObject result = new JSONObject();
             result.put("error", "申请时间有课程，请勿与课程冲突！");
             ResponseUtil.write(result, ServletActionContext.getResponse());
             return null;
         }
-        JSONObject result = new JSONObject();
         rent.setClassName(aClass.getClassName());
         rent.setClassType(aClass.getClassType());
         rent.setRentTime(sdf2.format(new Date()));

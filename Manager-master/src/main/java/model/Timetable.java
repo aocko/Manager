@@ -4,19 +4,19 @@ public class Timetable {
     private int timetableId;
     private int classId;
     private String week;
-    private String first;
-    private String second;
-    private String third;
-    private String fourth;
-    private String fifth;
-    private String sixth;
-    private String seventh;
-    private String eighth;
-    private String ninth;
-    private String tenth;
-    private String eleventh;
-    private String twelfth;
-    private String thirteenth;
+    private String first="无课程";
+    private String second="无课程";
+    private String third="无课程";
+    private String fourth="无课程";
+    private String fifth="无课程";
+    private String sixth="无课程";
+    private String seventh="无课程";
+    private String eighth="无课程";
+    private String ninth="无课程";
+    private String tenth="无课程";
+    private String eleventh="无课程";
+    private String twelfth="无课程";
+    private String thirteenth="无课程";
 
     public int getTimetableId() {
         return timetableId;

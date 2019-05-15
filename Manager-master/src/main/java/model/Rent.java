@@ -83,8 +83,6 @@ public class Rent {
         this.endTime = endTime;
     }
 
-
-
     public Integer getStudentId() {
         return studentId;
     }

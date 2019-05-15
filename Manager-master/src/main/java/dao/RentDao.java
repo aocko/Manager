@@ -17,7 +17,7 @@ import java.util.List;
 public class RentDao {
     TimetableDao timetableDao = new TimetableDao();
     ClassDao classDao = new ClassDao();
-    int[] time = {30000, 32700, 33000, 35700, 36900, 39600, 39900, 42600, 42900, 44700, 45000, 46800, 47400, 50100, 50400, 53100, 54300, 57000, 57300, 60000, 64800, 67500, 67800, 69500, 69800, 72500};
+  public   int[] time = {30000, 32700, 33000, 35700, 36900, 39600, 39900, 42600, 42900, 44700, 45000, 46800, 47400, 50100, 50400, 53100, 54300, 57000, 57300, 60000, 64800, 67500, 67800, 69500, 69800, 72500};
 
     public List<Rent> rentList(Connection con, Rent rent) throws SQLException, ParseException {
         StringBuffer sql = new StringBuffer("select * from t_rent");
@@ -221,6 +221,56 @@ public class RentDao {
         }
         return flag;
     }
+
+    public List<Timetable> timetableDetectionForAccept( List<Timetable> timetableList, Connection con, Date now) throws SQLException {
+        String weekday = DateUtil.getWeekDays(now);
+        for (Timetable timetable : timetableList) {
+            if (timetable.getWeek().equals(weekday)) {
+                int timeOfnow = DateUtil.getSecond(now);
+                java.lang.Class clazz = timetable.getClass();
+                Field[] fields = clazz.getDeclaredFields();
+                for (int i = 3; i < fields.length; i++) {
+                    Field f = fields[i];
+                    f.setAccessible(true);
+                    try {
+                        if (f.get(timetable).equals("无课程")) {
+                            if (timeOfnow < time[(i - 3) * 2 + 1] && timeOfnow > time[(i - 3) * 2]) {
+                                f.set(timetable, "已被预约");
+                            }
+                        }
+                    } catch (IllegalAccessException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+        return timetableList;
+    }
+
+    public List<Timetable> timetableDetectionModify( List<Timetable> timetableList, Connection con, Date now) throws SQLException {
+        String weekday = DateUtil.getWeekDays(now);
+        for (Timetable timetable : timetableList) {
+            if (timetable.getWeek().equals(weekday)) {
+                int timeOfnow = DateUtil.getSecond(now);
+                java.lang.Class clazz = timetable.getClass();
+                Field[] fields = clazz.getDeclaredFields();
+                for (int i = 3; i < fields.length; i++) {
+                    Field f = fields[i];
+                    f.setAccessible(true);
+                    try {
+                        if (f.get(timetable).equals("已被预约")) {
+                            if (timeOfnow < time[(i - 3) * 2 + 1] && timeOfnow > time[(i - 3) * 2]) {
+                                f.set(timetable, "无课程");
+                            }
+                        }
+                    } catch (IllegalAccessException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+        return timetableList;
+    }
     public void addRent(Connection con, Rent rent) throws SQLException, ParseException {
         String sql = "insert into t_rent values(null,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         PreparedStatement preparedStatement = con.prepareStatement(sql);
@@ -242,23 +292,32 @@ public class RentDao {
     }
 
     public boolean deleteRent(Connection connection, Rent rent,SimpleDateFormat format)  {
-
-        Date date = null;
+        Timetable2Dao timetable2Dao = new Timetable2Dao();
+        List<Timetable> timetableList = null;
         try {
-            date = format.parse(rent.getEndTime());
+            timetableList = timetable2Dao.timetable2List(connection, String.valueOf(rent.getClassId()));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        Date startTime = null;
+        Date endTime = null;
+        try {
+            startTime = format.parse(rent.getStartTime());
+            endTime = format.parse(rent.getEndTime());
         } catch (ParseException e) {
             e.printStackTrace();
         }
         Date now = new Date();
-        if (now.getTime() - date.getTime() > 432000000) {
-            String sql = "delete from t_rent where rentId="+rent.getRentId()+"";
-            PreparedStatement preparedStatement = null;
+        if (now.getTime() - endTime.getTime() > 0&&(rent.getRentStatus().equals("同意")||rent.getRentStatus().equals("申请已过期"))) {
+            List<Timetable>  timetableList1= null;
             try {
-                preparedStatement = connection.prepareStatement(sql);
-                preparedStatement.executeUpdate();
+                timetableList1 = timetableDetectionModify(timetableDetectionModify(timetableList, connection, startTime), connection, endTime);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+            timetable2Dao.timetable2ListUpdate(connection, String.valueOf(rent.getClassId()), timetableList1);
+        }
+        if (now.getTime() - endTime.getTime() > 432000000) {
             return true;
         }
         return false;

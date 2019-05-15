@@ -94,6 +94,10 @@
             <result name="success">/index.jsp</result>
             <result name="user">/userIndex.jsp</result>
         </action>
+        <action name="class_timetable2" class="action.TimetableAction" method="list2">
+            <result name="success">/index.jsp</result>
+            <result name="user">/userIndex.jsp</result>
+        </action>
         <action name="timetable_preSave" class="action.TimetableAction" method="preSave">
             <result name="success">/index.jsp</result>
         </action>

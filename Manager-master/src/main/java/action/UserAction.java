@@ -1,26 +1,22 @@
 package action;
 
 import com.opensymphony.xwork2.ActionSupport;
-import dao.GradeDao;
-import dao.MajorDao;
-import dao.StudentDao;
-import dao.UserDao;
-import model.Grade;
-import model.Major;
-import model.Student;
-import model.User;
+import com.sun.org.apache.bcel.internal.generic.NEW;
+import dao.*;
+import model.*;
+import model.Class;
 import net.sf.json.JSONObject;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import util.DbUtil;
-import dao.MajorDaoUtil;
 import util.ResponseUtil;
 import util.StringUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.sql.Connection;
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class UserAction extends ActionSupport implements ServletRequestAware {
     private HttpServletRequest request;
@@ -53,6 +49,8 @@ public class UserAction extends ActionSupport implements ServletRequestAware {
 
     private String oldPassword;
     private String majorId;
+    private ClassDao classDao = new ClassDao();
+    private  RentDao rentDao = new RentDao();
 
     public String getMajorId() {
         return majorId;
@@ -190,6 +188,10 @@ public class UserAction extends ActionSupport implements ServletRequestAware {
     }
 
     public String login() throws Exception {
+     Timer timer = new Timer();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        Rent rent = new Rent();
+        final int[] flag = {0};
 
         HttpSession session = request.getSession();
         if (status!=null&&status.equals("exit")) {
@@ -221,11 +223,42 @@ public class UserAction extends ActionSupport implements ServletRequestAware {
             return ERROR;
         } else {
             session.setAttribute("currentUser", currentUser);
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    Connection con2 = null;
+                    try {
+                        con2 = dbUtil.getCon();
+                        List<Rent> list = rentDao.rentList(con2, rent);
+                        for (Rent rent1 : list) {
+                            try {
+                                rentDao.Duplicatedetection(format, rent1, con2);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        flag[0] += 1;
+                        if (flag[0] >= 6) {
+                            timer.cancel();
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    } finally {
+                        try {
+                            dbUtil.closeCon(con2);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }, 0, 600000);
             if (currentUser.getUserType().equals("学生") || currentUser.getUserType().equals("老师")) {
                 return "student";
             }
             return SUCCESS;
         }
+
+
     }
 
     public String checkName() throws Exception {

@@ -1,6 +1,7 @@
 package action;
 
 import com.opensymphony.xwork2.ActionSupport;
+import dao.Timetable2Dao;
 import dao.TimetableDao;
 import model.Timetable;
 import util.DbUtil;
@@ -20,7 +21,7 @@ public class TimetableAction extends ActionSupport {
     private String aClassId;
     private String error;
     private String userName;
-
+    private Timetable2Dao timetable2Dao = new Timetable2Dao();
     public String getUserName() {
         return userName;
     }
@@ -80,6 +81,29 @@ public class TimetableAction extends ActionSupport {
     public String list() throws Exception {
         Connection con = dbUtil.getCon();
         timetableList = timetableDao.timetableList(con, classId);
+        aClassId = classId;
+        if (timetableList.size() == 0) {
+            error = "未找到该教室的课程表,请重新添加";
+            if (userName != null) {
+                error = "未找到该教室的课程表,请通知管理员重新添加";
+            }
+        }
+        if (timetableList.size() == 0&&userName != null) {
+            error = "未找到该教室的课程表,请通知管理员重新添加";
+        }
+        mainPage = "timetable/timetableList.jsp";
+        if (userName != null) {
+            mainPage = "timetable/timetableList2.jsp";
+            dbUtil.closeCon(con);
+            return "user";
+        }
+        dbUtil.closeCon(con);
+        return SUCCESS;
+    }
+
+    public String list2() throws Exception {
+        Connection con = dbUtil.getCon();
+        timetableList = timetable2Dao.timetable2List(con, classId);
         aClassId = classId;
         if (timetableList.size() == 0) {
             error = "未找到该教室的课程表,请重新添加";
