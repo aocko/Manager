@@ -68,6 +68,10 @@
             <result name="success">/index.jsp</result>
         </action>
 
+        <action name="student_delete" class="action.StudentAction" method="delete">
+
+        </action>
+
         <action name="major_*" class="action.MajorAction" method="{1}">
             <result name="success">/index.jsp</result>
             <result name="save" type="redirectAction">major_list</result>

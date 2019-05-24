@@ -139,11 +139,13 @@ public class TimetableAction extends ActionSupport {
 
         if ( (timetableDao.timetableList(con, classId) ).size()== 0) {
             timetableDao.saveTimetableList(con, classId, timetableList);
+            timetable2Dao.saveTimetable2List(con, classId, timetableList);
             mainPage = "timetable/timetableSave.jsp";
             return "save";
         }
         if (StringUtil.isNotEmpty(classId)&&StringUtil.isEmpty(aClassId)) {
             timetableDao.timetableListUpdate(con, classId, timetableList);
+            timetable2Dao.timetable2ListUpdate(con, classId, timetableList);
         }
         mainPage = "timetable/timetableSave.jsp";
         dbUtil.closeCon(con);

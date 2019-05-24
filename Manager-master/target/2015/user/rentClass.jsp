@@ -18,6 +18,15 @@
 %>
 
 <script type="text/javascript">
+    window.onload = function () {
+        var table = document.getElementById("table");
+        var rows = table.rows;
+        for (var i = 1; i < rows.length; i++) {
+            if ((rows[i].cells[5].innerText.trim()) == "禁止使用") {
+                rows[i].cells[7].children[0].setAttribute("disabled", "disabled");
+            }
+        }
+    }
     $(function () {
         $(".xq").click(function () {
             var code = $(this).attr("code");
@@ -99,7 +108,7 @@
             </div>
             <div class="modal-footer">
                 <button class="btn btn-default  btn-info" type="button"
-                        onclick="rent(<%=userName%>)">
+                        onclick="rent('<%=userName%>')">
                     申请
                 </button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
@@ -122,7 +131,7 @@
     </div>
     <button type="submit" class="btn btn-default btn-info">查询</button>
 </form>
-<table class="table table-hover table-bordered table-condensed table-striped" style="background-color: #ffffff;">
+<table class="table table-hover table-bordered table-condensed table-striped" style="background-color: #ffffff;" id="table">
     <thead>
     <tr style="font-size: 14px;text-align: center">
         <th style="text-align: center">序号</th>

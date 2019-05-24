@@ -110,7 +110,6 @@
                 success: function (result) {
                     var result = eval('(' + result + ')');
                     var gradeName = document.getElementById("gradeName");
-                    var majorName = document.getElementById("majorName");
                     gradeName.innerHTML = "";
                     for (var i = 0; i < result.gradeList.length; i++) {
                         gradeName.innerHTML += "<option  value='" + result.gradeList[i].gradeName + "'>" + result.gradeList[i].gradeName + "</option>";
@@ -207,14 +206,14 @@
                     <div class="control-group" id="majorNameDom">
                         <label class="control-label" for="majorName">所在专业</label>
                         <div class="controls">
-                            <select id="majorName" name="majorName" required="required" onchange="queryGrade()">
+                            <select id="majorName" name="majorName" required="required" style="height: 30px;width: 206px" onchange="queryGrade()">
                             </select>
                         </div>
                     </div>
                     <div class="control-group" id="gradeNameDom">
                         <label class="control-label" for="gradeName">所在年级</label>
                         <div class="controls">
-                            <select id="gradeName"  required="required">
+                            <select id="gradeName"  name="gradeName" required="required" style="height: 30px;width: 206px">
                             </select>
                         </div>
                     </div>

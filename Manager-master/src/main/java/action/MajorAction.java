@@ -77,12 +77,6 @@ public class MajorAction extends ActionSupport {
                 e1.printStackTrace();
             }
 
-            try {
-                    dbUtil.closeCon(con);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
             }
 
         try {

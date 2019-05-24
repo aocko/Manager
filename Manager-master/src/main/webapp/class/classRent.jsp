@@ -90,7 +90,7 @@ window.onload = function () {
 
                     <tr>
                         <td>
-                            <lable>教室类别：</lable>
+                            <lable>教室状态：</lable>
                         </td>
                         <td>
                             <select id="status" name="status">

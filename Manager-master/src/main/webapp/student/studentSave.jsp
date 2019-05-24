@@ -8,7 +8,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<script type="text/javascript">
+    function queryGrade() {
+        var select=document.getElementById('majorName');
+        var m_Name = select.options[select.selectedIndex].getAttribute("id");
+        $.ajax({
+            url: "gradeList",
+            data : {"majorId":m_Name},
+            type: "post",
+            success: function (result) {
+                var result = eval('(' + result + ')');
+                var gradeName = document.getElementById("gradeName");
+                gradeName.innerHTML = "";
+                for (var i = 0; i < result.gradeList.length; i++) {
+                    gradeName.innerHTML += "<option  value='" + result.gradeList[i].gradeName + "'>" + result.gradeList[i].gradeName + "</option>";
+                }
+            }
+        });
 
+    }
+
+
+</script>
 
 <div class="modal fade" id="mymodal" tabindex="-1">
     <div class="modal-dialog">
@@ -40,7 +61,7 @@
 
 
                     <td><label>学号</label></td>
-                    <td><input type="text" id="stuNo" name="student.stuNo" value="${student.stuNo}" required="required">
+                    <td><input type="number" id="stuNo" name="student.stuNo" value="${student.stuNo}" required="required">
                     </td>
                 </tr>
                 <tr>
@@ -69,11 +90,11 @@
                     <td><input type="text" id="stuDesc" name="student.stuDesc" value="${student.stuDesc}" required="required">
                     </td>
                     <td><label>所在专业:</label></td>
-                    <td><select id="majorName" name="student.majorName" required="required" >
+                    <td><select id="majorName" name="student.majorName" required="required"  onchange="queryGrade()">
                         <option value="${student.majorName}">${student.majorName}
                         </option>
                         <c:forEach var="major" items="${majorList}">
-                            <option value="${major.majorName}">${major.majorName}</option>
+                            <option value="${major.majorName}" id="${major.majorId}">${major.majorName}</option>
                         </c:forEach></select>
                     </td>
                 </tr>
@@ -81,9 +102,8 @@
                     <td><label>所在年级:</label></td>
                     <td><select id="gradeName" name="student.gradeName" required="required">
                         <option value="${student.gradeName}">${student.gradeName}</option>
-                        <c:forEach var="grade" items="${gradeList}">
-                            <option value="${grade.gradeName}">${grade.gradeName}</option>
-                        </c:forEach></select>
+
+                    </select>
                     </td>
                 </tr>
                 <tr style="position: relative; left: 50px">

@@ -104,24 +104,26 @@ public class ClassDao {
         return aClass;
     }
     public int classAdd(Connection con, Class aclass) throws SQLException {
-        String sql = "insert into t_class values(null,?,?,?,?,? ";
+        String sql = "insert into t_class values(null,?,?,?,?,?,?)";
         PreparedStatement preparedStatement = con.prepareStatement(sql);
         preparedStatement.setString(1, aclass.getClassName());
         preparedStatement.setString(2, aclass.getClassDesc());
-        preparedStatement.setString(3, aclass.getClassType());
-        preparedStatement.setInt(4, aclass.getClassSize());
-        preparedStatement.setString(5, aclass.getEqCondition());
+        preparedStatement.setInt(3, aclass.getClassSize());
+        preparedStatement.setString(4, aclass.getClassType());
+        preparedStatement.setString(5, aclass.getClassStatus());
+        preparedStatement.setString(6, aclass.getEqCondition());
         int result = preparedStatement.executeUpdate();
         return result;
     }
     public int classUpdate(Connection con, Class aclass) throws SQLException {
-        String sql = "update t_class set className=?,classDesc=?,classType=? ,classSize=?,eqCondition=? where classId=?";
+        String sql = "update t_class set className=?,classDesc=?,classType=? ,classSize=?,classStatus=?,eqCondition=? where classId=?";
         PreparedStatement preparedStatement = con.prepareStatement(sql);
         preparedStatement.setString(1, aclass.getClassName());
         preparedStatement.setString(2, aclass.getClassDesc());
         preparedStatement.setString(3, aclass.getClassType());
-        preparedStatement.setString(5, aclass.getEqCondition());
-        preparedStatement.setInt(6, aclass.getClassId());
+        preparedStatement.setString(5, aclass.getClassStatus());
+        preparedStatement.setString(6, aclass.getEqCondition());
+        preparedStatement.setInt(7, aclass.getClassId());
         preparedStatement.setInt(4, aclass.getClassSize());
         int result = preparedStatement.executeUpdate();
         return result;

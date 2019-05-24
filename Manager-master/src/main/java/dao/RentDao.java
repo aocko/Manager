@@ -24,7 +24,7 @@ public class RentDao {
         if (rent != null) {
             if (rent.getClassStatus() != null || rent.getRentTime() != null || rent.getEndTime() != null) {
                 if (rent.getClassStatus().equals("空闲") || rent.getClassStatus().equals("使用中")) {
-                    sql.append(" and status ='" + rent.getClassStatus() + "' ");
+                    sql.append(" and classStatus ='" + rent.getClassStatus() + "' ");
                 }
                 if (rent.getStartTime() != null && !rent.getStartTime().equals("")) {
                     sql.append(" and startTime >='" + rent.getStartTime() + "' ");
@@ -153,12 +153,19 @@ public class RentDao {
     public void Duplicatedetection(SimpleDateFormat format, Rent rent, Connection con) throws SQLException, ParseException {
         Date date = null;
         date = format.parse(rent.getEndTime());
+        Date date2 = null;
+        date2 = format.parse(rent.getStartTime());
         Date now = new Date();
         if (now.compareTo(date) == 1) {
             updateClassStatus(con, rent.getRentId());
             classDao.updateStatus(con, rent.getClassId());
             rent.setClassStatus("空闲");
             rent.setRentStatus("申请已过期");
+        }
+        if (now.compareTo(date)==-1&&now.compareTo(date2)==1&&rent.getRentStatus().equals("同意")){
+            rent.setClassStatus("使用中");
+            updateClassStatusForClass(con, rent.getRentId());
+            classDao.updateStatusForClass(con, rent.getClassId());
         }
         timeTableDetection( rent,rent.getClassId(), con,now,null);
     }
@@ -177,13 +184,13 @@ public class RentDao {
                         if (!f.get(timetable).equals("无课程")) {
                             if (timeOfnow < time[(i - 3) * 2 + 1] && timeOfnow > time[(i - 3) * 2]) {
                                 if (rent != null) {
-                                    updateClassStatus(con, rent.getRentId());
+                                    updateClassStatusForClass(con, rent.getRentId());
                                     rent.setClassStatus("使用中");
                                 }
                                 if (aClass != null) {
                                     aClass.setClassStatus("使用中");
                                 }
-                                classDao.updateStatus(con, classId);
+                                classDao.updateStatusForClass(con, classId);
                                 break;
                             }
                         }
@@ -234,7 +241,7 @@ public class RentDao {
                     f.setAccessible(true);
                     try {
                         if (f.get(timetable).equals("无课程")) {
-                            if (timeOfnow < time[(i - 3) * 2 + 1] && timeOfnow > time[(i - 3) * 2]) {
+                            if (timeOfnow <= time[(i - 3) * 2 + 1] && timeOfnow >= time[(i - 3) * 2]) {
                                 f.set(timetable, "已被预约");
                             }
                         }

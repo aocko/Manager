@@ -278,12 +278,14 @@ public class UserAction extends ActionSupport implements ServletRequestAware {
 
     public String gradeList() throws Exception {
         Connection con = dbUtil.getCon();
+        majorList = majorDao.majorList(con);
         if (majorId != null) {
             gradeList = gradeDao.gradeList(con, Integer.parseInt(majorId));
         }else {
-            gradeList = gradeDao.gradeList(con);
+            gradeList = gradeDao.gradeList(con,majorList.get(0).getMajorId());
+
         }
-        majorList = majorDao.majorList(con);
+
         JSONObject result = new JSONObject();
         result.put("gradeList", gradeList);
         result.put("majorList", majorList);

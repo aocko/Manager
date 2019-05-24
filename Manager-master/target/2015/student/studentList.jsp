@@ -17,8 +17,14 @@ function dialog(studentId) {
 
 function studentDelete() {
     $.post("student_delete", {studentId: Id}, function (r) {
+        var result = eval('(' + r + ')');
+        if (result.error) {
+            alert(result.error);
+        } else{
+            window.location.href = "${pageContext.request.contextPath}/student_list"
+        }
     });
-    window.location.reload();
+
 
 }
 

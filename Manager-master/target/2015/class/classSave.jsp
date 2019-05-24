@@ -41,21 +41,25 @@
                 <tr>
                     <td><label>设备状态</label></td>
                     <td><select id="eqCondition" name="aClass.eqCondition" required="required" >
-                        <option value="${aClass.eqCondition}" >${aClass.eqCondition}</option>
                         <option value="良好">良好</option>
                         <option value="禁止使用">禁止使用</option>
                     </select></td>
                     <td><label>教室大小</label></td>
-                    <td><input type="text" id="classSize" name="aClass.classSize" value="${aClass.classSize}"></td>
+                    <td><input type="number" id="classSize" name="aClass.classSize" value="${aClass.classSize}"></td>
                 </tr>
                 <tr>
                 <td><label>教室备注</label></td>
                 <td><input type="text" id="classDesc" name="aClass.classDesc" value="${aClass.classDesc}"></td>
+                    <td><label>教室状态</label></td>
+                    <td><select id="classStatus" name="aClass.classStatus" required="required" >
+                        <option value="使用中">使用中</option>
+                        <option value="空闲">空闲</option>
+                    </select></td>
                 </tr>
-            <tr style="position: relative; left: 50px">
+            <tr style="position: relative; left: 150px">
                 <td><input type="hidden" id="classId" name="classId" value="${aClass.classId}">
-                    <input   style="position: relative; left: 100px" type="submit" class="btn btn-primary" value="保存"></td>
-                <td><input style="position: relative; left: 100px" type="button" class="btn btn-primary" value="返回" onclick="javascript:history.back()"/>&nbsp;&nbsp; </td>
+                    <input   style="position: relative; left: 230px" type="submit" class="btn btn-primary" value="保存"></td>
+                <td><input style="position: relative; left: 230px" type="button" class="btn btn-primary" value="返回" onclick="javascript:history.back()"/>&nbsp;&nbsp; </td>
             </tr></table>
         </form>
     </div>

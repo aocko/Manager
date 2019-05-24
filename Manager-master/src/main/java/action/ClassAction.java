@@ -13,6 +13,7 @@ import util.ResponseUtil;
 import util.StringUtil;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
@@ -94,6 +95,11 @@ public class ClassAction extends ActionSupport  implements ServletRequestAware {
         for (int i = 1; i <= ((classList.size())/15+1); i++) {
             pageNoList.add(i);
         }
+        if (classList.size() == 15) {
+            pageNoList = new ArrayList<>();
+            pageNoList.add(1);
+        }
+
         if (pageNo == null&&classList.size()>=15) {
             classList = classList.subList(0, 15);
         } else {
@@ -131,14 +137,19 @@ public class ClassAction extends ActionSupport  implements ServletRequestAware {
         dbUtil.closeCon(con);
         return "save";
     }
-    public  String delete() throws Exception {
+    public  String delete() throws IOException {
         Connection con = null;
-        con = dbUtil.getCon();
-        classDao.classDelete(con, classId);
         JSONObject resultJson=new JSONObject();
+        try {con = dbUtil.getCon();
+            classDao.classDelete(con, classId);
             resultJson.put("success", true);
-        ResponseUtil.write(resultJson, ServletActionContext.getResponse());
-        dbUtil.closeCon(con);
+            ResponseUtil.write(resultJson, ServletActionContext.getResponse());
+            dbUtil.closeCon(con);
+        } catch (Exception e) {
+            resultJson.put("error", "该教室无法删除！有申请待处理中");
+            ResponseUtil.write(resultJson, ServletActionContext.getResponse());
+        }
+
 
         return SUCCESS;
     }

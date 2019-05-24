@@ -42,11 +42,11 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="Modal1Label1">修改密码</h4>
+                <h4 class="modal-title" id="Modal1Label1">申请</h4>
             </div>
             <div class="modal-body" >
                 <div class="form-group">
-                    <label for="week">当前密码</label>
+                    <label for="week">星期</label>
                     <select id="week" name="week" class="form-control">
                         <option value="1">星期一</option>
                         <option value="2" }>星期二</option>
@@ -56,7 +56,7 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="startTime">新密码</label>
+                    <label for="startTime">开始时间</label>
                     <select id="startTime" name="startTime" class="form-control">
                         <option value="1">第一小节</option>
                         <option value="2" }>第二小节</option>
@@ -74,7 +74,7 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="endTime">新密码</label>
+                    <label for="endTime">结束时间</label>
                     <select id="endTime" name="endTime" class="form-control">
                         <option value="1">第一小节</option>
                         <option value="2" }>第二小节</option>
@@ -96,7 +96,7 @@
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default"  onclick="rentForweek(<%=userName%>)">申请</button>
+                <button type="button" class="btn btn-default"  onclick="rentForweek('<%=userName%>')">申请</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
             </div>
         </div><!-- /.modal-content -->

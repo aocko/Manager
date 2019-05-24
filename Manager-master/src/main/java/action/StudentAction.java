@@ -1,24 +1,26 @@
 package action;
 
 import com.opensymphony.xwork2.ActionSupport;
-import dao.GradeDao;
-import dao.MajorDao;
-import dao.StudentDao;
+import dao.*;
 import model.Grade;
 import model.Major;
 import model.Student;
 import model.User;
+import net.sf.json.JSONObject;
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import util.DbUtil;
-import dao.MajorDaoUtil;
+import util.ResponseUtil;
 import util.StringUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.jar.JarEntry;
 
 public class StudentAction extends ActionSupport implements ServletRequestAware {
     private HttpServletRequest request;
@@ -181,6 +183,10 @@ public class StudentAction extends ActionSupport implements ServletRequestAware 
             for (int i = 1; i <= ((studentList.size())/15+1); i++) {
                 pageNoList.add(i);
             }
+            if (studentList.size() == 15) {
+                pageNoList = new ArrayList<>();
+                pageNoList.add(1);
+            }
             if (pageNo ==null) {
                 pageNo ="1";
             }
@@ -311,24 +317,30 @@ public class StudentAction extends ActionSupport implements ServletRequestAware 
         return SUCCESS;
     }
 
-    public String delete() {
-
+    public String delete() throws Exception {
+        JSONObject result = new JSONObject();
         Connection con = null;
-        System.out.println("成功");
-        try {
-            con = dbUtil.getCon();
-            studentDao.studentDelete(con, Integer.parseInt(studentId));
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                dbUtil.closeCon(con);
-            } catch (Exception e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+        con = dbUtil.getCon();
+            if ((new UserDao().selectByStudentid(con, Integer.parseInt(studentId))) != null) {
+                result.put("error", "该用户已注册，无法删除！");
+                ResponseUtil.write(result, ServletActionContext.getResponse());
+            }else {
+                try {
+                    studentDao.studentDelete(con, Integer.parseInt(studentId));
+                    ResponseUtil.write(result, ServletActionContext.getResponse());
+                } catch (Exception e) {
+                    result.put("error", "该用户已注册，无法删除！");
+                    ResponseUtil.write(result, ServletActionContext.getResponse());
+                } finally {
+                    try {
+                        dbUtil.closeCon(con);
+                    } catch (Exception e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+                }
             }
-        }
-        return "save";
+        return null;
     }
 
     public String changeDetail() throws Exception {

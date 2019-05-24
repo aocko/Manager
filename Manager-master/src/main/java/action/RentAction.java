@@ -215,8 +215,8 @@ public class RentAction extends ActionSupport {
 
     public String list() throws Exception, SQLException {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-        Connection con = dbUtil.getCon();
         Rent rent = new Rent();
+        Connection con = dbUtil.getCon();
         rent.setStartTime(startTime);
         rent.setEndTime(endTime);
         rent.setClassStatus(status);
@@ -275,7 +275,6 @@ public class RentAction extends ActionSupport {
         rentDao.updaterentStatus(con, rentId, rentStatus, rejectReason);
         if (rentStatus.equals("同意")) {
             List<Timetable> timetableList = timetable2Dao.timetable2List(con, String.valueOf(r.getClassId()));
-
             if (timetableList.size() == 0) {
                 List<Timetable> timetableList2 = new ArrayList<>();
                 String[] weekdays = {"星期一", "星期二", "星期三", "星期四", "星期五"};
@@ -285,6 +284,7 @@ public class RentAction extends ActionSupport {
                     timetableList2.add(timetable);
                 }
                 timetable2Dao.saveTimetable2List(con, String.valueOf(r.getClassId()), timetableList2);
+                timetableDao.saveTimetableList(con, String.valueOf(r.getClassId()), timetableList2);
             }
             List<Timetable> timetableList2 = timetable2Dao.timetable2List(con, String.valueOf(r.getClassId()));
             List<Timetable>  timetableList1=   rentDao.timetableDetectionForAccept(rentDao.timetableDetectionForAccept(timetableList2, con, startTime), con, endTime);
@@ -292,7 +292,6 @@ public class RentAction extends ActionSupport {
                 timetable2Dao.timetable2ListUpdate(con, String.valueOf(r.getClassId()), timetableList1);
             } catch (Exception e) {
             }
-            rentDao.updateAgreeStatus(con, rentId, classId);
         }
         rentList = rentDao.rentList(con, null);
         ResponseUtil.write(result, ServletActionContext.getResponse());
@@ -302,12 +301,20 @@ public class RentAction extends ActionSupport {
     }
 
     public String rentList() throws Exception {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        Rent rent = new Rent();
         Connection con = dbUtil.getCon();
+        rentList = rentDao.rentList(con, rent);
+        rentList.removeIf(rent1 -> rentDao.deleteRent(con, rent1, format));
         Timer timer = new Timer();
         classList = classDao.getclassList(con, null);
         if (classList != null) {
             for (int i = 1; i <= ((classList.size()) / 15 + 1); i++) {
                 pageNoList.add(i);
+            }
+            if (classList.size() == 15) {
+                pageNoList = new ArrayList<>();
+                pageNoList.add(1);
             }
             if (classList.size() >= 15) {
                 classList = classList.subList(0, 15);
@@ -348,6 +355,11 @@ public class RentAction extends ActionSupport {
         for (int i = 1; i <= ((classListsize) / 15 + 1); i++) {
             pageNoList.add(i);
         }
+        if (classListsize == 15) {
+            pageNoList = new ArrayList<>();
+            pageNoList.add(1);
+        }
+
         if (pageNo == null) {
             pageNo = "1";
         }
@@ -377,7 +389,6 @@ public class RentAction extends ActionSupport {
             int[] time = rentDao.time;
             Date date =new Date(now.getTime()+time[2*(Integer.parseInt(startTime)-1)]*1000+(week-weekday)*24*60*60*1000);
             Date date2 =new Date(now.getTime()+time[2*(Integer.parseInt(endTime)-1)+1]*1000+(week-weekday)*24*60*60*1000);
-
             startTime = sdf.format(date);
             endTime = sdf.format(date2);
         }
@@ -392,9 +403,6 @@ public class RentAction extends ActionSupport {
             ResponseUtil.write(result, ServletActionContext.getResponse());
             return null;
         }
-
-
-
         Class aClass = classDao.getclassByid(con, String.valueOf(classId));
         int studentId = userDao.getStudentIdByuserName(userName, con);
         Student student = studentDao.getStudentById(con, String.valueOf(studentId));
@@ -450,6 +458,7 @@ public class RentAction extends ActionSupport {
         JSONObject result = new JSONObject();
         result.put("badge", badge);
         ResponseUtil.write(result, ServletActionContext.getResponse());
+        dbUtil.closeCon(connection);
         return null;
     }
 
