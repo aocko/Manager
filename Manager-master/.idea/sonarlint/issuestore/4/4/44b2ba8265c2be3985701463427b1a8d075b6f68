@@ -1,9 +1,0 @@
-
->squid:S1948"(Make "dbUtil" transient or serializable.(ú„çI
-Zsquid:S1155o">Use isEmpty() to check whether the collection is empty or not.(”¬µÍøÿÿÿÿ
-Ksquid:EmptyStatementUsageCheck"Remove this empty statement.(Ðþ­ÿúÿÿÿÿ
-Ksquid:S1948"/Make "timetableList" transient or serializable.(Ðþ­ÿúÿÿÿÿ
-Gsquid:S1948"+Make "timetable" transient or serializable.(Öïž¾ÿÿÿÿÿ
-Usquid:S1155U">Use isEmpty() to check whether the collection is empty or not.(ªâùÄ
-esquid:S00100l"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¯çñc
-Jsquid:S1948".Make "timetableDao" transient or serializable.(£¼Óšüÿÿÿÿ

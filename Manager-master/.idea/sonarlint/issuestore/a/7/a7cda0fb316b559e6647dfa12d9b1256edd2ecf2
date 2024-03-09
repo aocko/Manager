@@ -1,27 +1,0 @@
-
-P
-squid:S106™"9Replace this use of System.out or System.err by a logger.(êÝùð
-U
-squid:S106ï"9Replace this use of System.out or System.err by a logger.(®ŽÖÐùÿÿÿÿ
-^squid:HiddenFieldCheckÎ";Rename "gradeId" which hides the field declared at line 29.(ßÖëÒ
-Osquid:S1135ù"2Complete the task associated to this TODO comment.(ÕÌ®þÿÿÿÿ
-Osquid:UselessImportCheck"+Remove this unused import 'java.util.Date'.(¸…¼ü
-Nsquid:UselessImportCheck"*Remove this unused import 'util.DateUtil'.( ±„Ô
-@squid:S1148¤"#Use a logger to log this exception.(€ÉÔ…ýÿÿÿÿ
-@squid:S1148©"#Use a logger to log this exception.(€ÉÔ…ýÿÿÿÿ
-@squid:S1148º"#Use a logger to log this exception.(€ÉÔ…ýÿÿÿÿ
-@squid:S1148¿"#Use a logger to log this exception.(€ÉÔ…ýÿÿÿÿ
-@squid:S1148â"#Use a logger to log this exception.(€ÉÔ…ýÿÿÿÿ
-@squid:S1148ç"#Use a logger to log this exception.(€ÉÔ…ýÿÿÿÿ
-@squid:S1148ô"#Use a logger to log this exception.(€ÉÔ…ýÿÿÿÿ
-@squid:S1148ú"#Use a logger to log this exception.(€ÉÔ…ýÿÿÿÿ
-@squid:S1948")Make "request" transient or serializable.(íÑä™
-Dsquid:S1948"-Make "studentList" transient or serializable.(„££º
-@squid:S1948!")Make "student" transient or serializable.(¤—öö
-Hsquid:S1948#",Make "studentDao" transient or serializable.(„œµ‹þÿÿÿÿ
->squid:S1948$"(Make "dbUtil" transient or serializable.(ú„çI
-Gsquid:S1948&"+Make "majorList" transient or serializable.(‚’´âýÿÿÿÿ
-Fsquid:S1948'"*Make "majorDao" transient or serializable.(›Œ©Üþÿÿÿÿ
-Gsquid:S1948("+Make "gradeList" transient or serializable.(ô¸‰Ðüÿÿÿÿ
-Fsquid:S1948;"*Make "gradeDao" transient or serializable.(Ý¡ßæùÿÿÿÿ
-Jsquid:S1948<".Make "majorDaoUtil" transient or serializable.(É’ïíûÿÿÿÿ
