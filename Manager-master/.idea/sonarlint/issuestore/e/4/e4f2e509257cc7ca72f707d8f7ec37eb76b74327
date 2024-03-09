@@ -1,18 +1,0 @@
-
-csquid:S00112/"FDefine and throw a dedicated exception instead of using a generic one.(ææýÎøÿÿÿÿ
-^squid:S2095"GUse try-with-resources or close this "ResultSet" in a "finally" clause.(¶ë‰Þ
-csquid:S2095n"GUse try-with-resources or close this "ResultSet" in a "finally" clause.(³ÇŒÅþÿÿÿÿ
-lsquid:S2095‹"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(î¨»Ñüÿÿÿÿ
-csquid:S00112"FDefine and throw a dedicated exception instead of using a generic one.(ÅÌðŠûÿÿÿÿ
-fsquid:S2095x"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(µÏ‰ƒ
-csquid:S00112E"FDefine and throw a dedicated exception instead of using a generic one.(¬øÚÞùÿÿÿÿ
-ksquid:S2095G"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(î¨»Ñüÿÿÿÿ
-esquid:S2095<"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(ÎØ¤d
-^squid:S2095I"GUse try-with-resources or close this "ResultSet" in a "finally" clause.(¶ë‰Þ
-csquid:S00112v"FDefine and throw a dedicated exception instead of using a generic one.(ÿÿÆÿÿÿÿÿ
-{squid:S11491"_Replace the synchronized class "StringBuffer" by an unsynchronized one such as "StringBuilder".(Â…úÿÿÿÿÿ
-fsquid:S2095"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(×ûÓ£
-dsquid:S00112‰"FDefine and throw a dedicated exception instead of using a generic one.(ê—ÎØþÿÿÿÿ
-vsquid:S1149"_Replace the synchronized class "StringBuffer" by an unsynchronized one such as "StringBuilder".(Õ“³Ø
-^squid:S2095="GUse try-with-resources or close this "ResultSet" in a "finally" clause.(¶ë‰Þ
-fsquid:S2095a"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(©×ƒ°

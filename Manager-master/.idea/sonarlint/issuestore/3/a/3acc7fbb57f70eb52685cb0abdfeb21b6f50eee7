@@ -1,24 +1,0 @@
-
-esquid:S2095&"GUse try-with-resources or close this "ResultSet" in a "finally" clause.(¶ë‰Ş8ƒ‰‘‰ -
-Msquid:S1066°"/Merge this if statement with the enclosing one.(ß²ºK8ß‰¨ -
-vsquid:S2077„"RUse a variable binding mechanism to construct this query instead of concatenation.(î¨»Ñüÿÿÿÿ8ƒ‰‘‰ -
-Gsquid:S1148¾"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8ß‰¨ -
-esquid:S2095]"GUse try-with-resources or close this "ResultSet" in a "finally" clause.(¶ë‰Ş8ƒ‰‘‰ -
-ssquid:S2095‰"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(ÁÄ¬¡şÿÿÿÿ8Í¢¢ -
-rsquid:S2095}"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(î¨»Ñüÿÿÿÿ8ƒ‰‘‰ -
-Rsquid:S1066"/Merge this if statement with the enclosing one.(”í¥Íûÿÿÿÿ8ƒ‰‘‰ -
-vsquid:S2077‰"RUse a variable binding mechanism to construct this query instead of concatenation.(ÁÄ¬¡şÿÿÿÿ8Í¢¢ -
-ssquid:S2095‘"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(î¨»Ñüÿÿÿÿ8È®’ -
-rsquid:S2095@"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(î¨»Ñüÿÿÿÿ8­¿¾§ -
-nsquid:S2095Ç"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(µÏ‰ƒ8È®’ -
-esquid:S2095A"GUse try-with-resources or close this "ResultSet" in a "finally" clause.(¶ë‰Ş8­¿¾§ -
-ssquid:S2095„"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(î¨»Ñüÿÿÿÿ8ƒ‰‘‰ -
-ª%squid:RedundantThrowsDeclarationCheckÅ"qRemove the declaration of thrown exception 'java.text.ParseException', as it cannot be thrown from method's body.(—òğ8È®’ -
-esquid:UselessImportCheck"<Remove this unused import 'com.mysql.cj.protocol.Resultset'.(«‹’ûÿÿÿÿ
-}squid:S1149"_Replace the synchronized class "StringBuffer" by an unsynchronized one such as "StringBuilder".(‘ğè8ƒ‰‘‰ -
-rsquid:S2095v"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(î¨»Ñüÿÿÿÿ8ƒ‰‘‰ -
-usquid:S2077\"RUse a variable binding mechanism to construct this query instead of concatenation.(î¨»Ñüÿÿÿÿ8ƒ‰‘‰ -
-Nsquid:S2200›"/Only the sign of the result should be examined.(ø™“¾8È®’ -
-esquid:S2095%"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(ÎØ¤d
-msquid:S00100—"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(šŸÎ<8È®’ -
-ksquid:S2095\"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(î¨»Ñüÿÿÿÿ

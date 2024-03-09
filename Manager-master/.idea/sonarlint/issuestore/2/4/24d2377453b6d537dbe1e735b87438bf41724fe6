@@ -1,31 +1,0 @@
-
-]squid:UselessImportCheck"-Remove this unused import 'net.sf.json.JSON'.(³ş¥ğüÿÿÿÿ8¶¾ñ® -
-‰squid:S4165£"eRemove this useless assignment; "endTime" already holds the assigned value along all execution paths.(¨Éœ¾şÿÿÿÿ8¶¾ñ® -
-Msquid:S1948"*Make "rentList" transient or serializable.(–üÂÕùÿÿÿÿ8¶¾ñ® -
-nsquid:UselessImportCheck"CRemove this unused import 'javax.servlet.http.HttpServletResponse'.(Á¨ïë8¶¾ñ® -
-Isquid:S1948"+Make "classList" transient or serializable.(˜™Ôà8¶¾ñ® -
-Gsquid:S1148"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8¶¾ñ® -
-Gsquid:S1148–"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8¶¾ñ® -
-Ysquid:S1141"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ8¶¾ñ® -
-Gsquid:S1148Í"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8¶¾ñ® -
-Ysquid:S1141Á"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ8¶¾ñ® -
-Rsquid:S1948™".Make "timetableDao" transient or serializable.(ÿÛÆÿÿÿÿÿ8¶¾ñ® -
-Ssquid:S1656£"/Remove or correct this useless self-assignment.(¨Éœ¾şÿÿÿÿ8¶¾ñ® -
-vsquid:S00117«"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(óüİ–şÿÿÿÿ8¶¾ñ® -
-bsquid:HiddenFieldCheck°"8Rename "rent" which hides the field declared at line 24.(÷¡é÷8¶¾ñ® -
-Msquid:S1948]"*Make "classDao" transient or serializable.(ø¨ÙÂÿÿÿÿÿ8¶¾ñ® -
-Ssquid:S1656¢"/Remove or correct this useless self-assignment.(èÿ‰Ëùÿÿÿÿ8¶¾ñ® -
-Gsquid:S1148³"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8¶¾ñ® -
-Gsquid:S1148·"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8¶¾ñ® -
-Gsquid:S1148›"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8¶¾ñ® -
-qsquid:S00117¬"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ìğş8¶¾ñ® -
-Gsquid:S1948—"(Make "dbUtil" transient or serializable.(³è†ÿ8¶¾ñ® -
-Ysquid:UselessImportCheck"/Remove this unused import 'java.sql.Timestamp'.(èò½+8¶¾ñ® -
-Gsquid:S1148…"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8¶¾ñ® -
-bsquid:HiddenFieldCheck"8Rename "rent" which hides the field declared at line 24.(÷¡é÷8¶¾ñ® -
-Isquid:S1948"&Make "rent" transient or serializable.(…‰ Üûÿÿÿÿ8¶¾ñ® -
-Gsquid:S1148È"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8¶¾ñ® -
-Msquid:S1948˜")Make "rentDao" transient or serializable.(Ôõ˜ñúÿÿÿÿ8¶¾ñ® -
-Gsquid:S1148’"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8¶¾ñ® -
-‹squid:S4165¢"gRemove this useless assignment; "startTime" already holds the assigned value along all execution paths.(èÿ‰Ëùÿÿÿÿ8¶¾ñ® -
-Gsquid:S1148Ä"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8¶¾ñ® -
